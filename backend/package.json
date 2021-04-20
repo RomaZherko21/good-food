@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "http-errors": "^1.8.0",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.5.0",
     "sequelize": "^6.6.2"

@@ -1,7 +1,9 @@
-const Customer = require('../models/customer.model');
 const bcrypt = require("bcrypt");
-const transporter = require('../config/mail');
 const process = require("dotenv").config().parsed;
+const createError = require('http-errors');
+
+const Customer = require('../models/customer.model');
+const transporter = require('../config/mail');
 const getRandomNumber = require('../helpers/getRandomNumber');
 
 class AuthController {
@@ -10,29 +12,28 @@ class AuthController {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-        let emailCode = getRandomNumber(4);
+        let token = getRandomNumber(4);
 
         transporter.sendMail({
             from: process.EMAIL_NAME,
             to: req.body.email,
             subject: 'Code Authorization',
             html:
-                `Your code: <strong>${emailCode}</strong> `,
+                `Your code: <strong>${token}</strong> `,
         })
 
-
-        Customer.create({ email: req.body.email, password: hashedPassword, active: JSON.stringify({ emailCode, active: false }) })
+        Customer.create({ email: req.body.email, password: hashedPassword, active: JSON.stringify({ token, active: false }) })
             .then(({ dataValues }) => {
                 res.status(200).send({ ...dataValues })
             })
-            .catch(err => {
-                res.status(404).send(err.message)
+            .catch(() => {
+                return next(createError(401, `This email is already exist!`));
             });
     }
     emailChecked(req, res) {
         Customer.findOne({ where: { email: req.body.email } })
             .then(async ({ dataValues }) => {
-                if (req.body.emailCode == JSON.parse(dataValues.active).emailCode) {
+                if (req.body.token == JSON.parse(dataValues.active).token) {
                     Customer.update(
                         { active: 'true' },
                         { where: { email: req.body.email } }
@@ -40,16 +41,20 @@ class AuthController {
                         .then(function (rowsUpdated) {
                             res.json(rowsUpdated)
                         })
-                        .catch(() => { res.send('FUCKING ERRROR') })
+                        .catch(() => {
+                            return next(createError(500, `User was not updated!`));
+                        })
+                } else {
+                    return next(createError(401, `Wrong token!`));
                 }
             })
-            .catch(err => {
-                res.status(404).send(err.message)
+            .catch(() => {
+                return next(createError(401, `User was not found!`));
             });
 
 
     }
-    signIn(req, res) {
+    signIn(req, res, next) {
         Customer.findOne({ where: { email: req.body.email } })
             .then(async ({ dataValues }) => {
 
@@ -58,11 +63,11 @@ class AuthController {
                 if (validPassword && JSON.parse(dataValues.active).active) {
                     res.status(200).send({ ...dataValues })
                 } else {
-                    res.status(400).send({ error: "Invalid Password" });
+                    return next(createError(401, `Wrong data!`));
                 }
             })
-            .catch(err => {
-                res.status(404).send(err.message)
+            .catch(() => {
+                return next(createError(401, `Wrong email!`));
             });
     }
     cookie(req, res) {

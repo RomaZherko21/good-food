@@ -8,16 +8,16 @@ function App() {
   let [code, setCode] = useState('');
 
   function signUp() {
-    axios.post('http://localhost:5000/auth/signUp', {
+    axios.post('http://localhost:5000/auth/signIn', {
       email,
       password
     })
     .then(function (response) {
       console.log(response);
     })
-    .catch(function (error) {
-      console.log(error);
-    });
+    // .catch(function (error) {
+    //   console.log(error.message);
+    // });
   }
   
   function emailChecked(){

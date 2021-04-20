@@ -2,11 +2,11 @@ const process = require("dotenv").config().parsed;
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const express = require('express');
-const sequelize = require("./config/mySQL");
 const cookieParser = require('cookie-parser')
 const chalk = require('chalk');
 
 const router = require('./routes/index')
+const sequelize = require("./config/mySQL");
 
 const app = express();
 
@@ -25,4 +25,16 @@ sequelize.sync().then(() => {
   })
 }).catch(err => console.log(err));
 
-app.use('/', router)
+app.use('/', router);
+
+app.use((error, req, res, next) => {
+
+  console.log('Error status: ', error.status)
+  console.log('Message: ', error.message)
+
+  res.json({
+    status: error.status,
+    message: error.message,
+    stack: error.stack
+  })
+})
