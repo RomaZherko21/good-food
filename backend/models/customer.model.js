@@ -20,6 +20,10 @@ const Customer = sequelize.define("customer", {
     active: {
         type: DataTypes.STRING,
         allowNull: true,
+    },
+    base32: {
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 }, {
     freezeTableName: false, //table name = "Customer" will be "Customer" in a database (not "Customers") 

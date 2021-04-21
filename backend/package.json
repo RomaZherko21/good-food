@@ -21,6 +21,8 @@
     "http-errors": "^1.8.0",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.5.0",
-    "sequelize": "^6.6.2"
+    "qrcode": "^1.4.4",
+    "sequelize": "^6.6.2",
+    "speakeasy": "^2.0.0"
   }
 }

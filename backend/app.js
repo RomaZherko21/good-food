@@ -29,8 +29,8 @@ app.use('/', router);
 
 app.use((error, req, res, next) => {
 
-  console.log('Error status: ', error.status)
-  console.log('Message: ', error.message)
+  console.log(chalk.red.bold('Error status: '+ error.status))
+  console.log(chalk.red.bold('Message: '+ error.message))
 
   res.json({
     status: error.status,

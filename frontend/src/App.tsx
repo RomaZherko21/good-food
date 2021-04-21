@@ -7,20 +7,23 @@ function App() {
   let [password, setPassword] = useState('');
   let [code, setCode] = useState('');
 
+  let [QR, setQR] = useState('')
+
   function signUp() {
-    axios.post('http://localhost:5000/auth/signIn', {
+    axios.post('http://localhost:5000/auth/signUp', {
       email,
       password
     })
-    .then(function (response) {
-      console.log(response);
-    })
+      .then(function (response) {
+        console.log(response.data);
+        setQR(response.data.QR);
+      })
     // .catch(function (error) {
     //   console.log(error.message);
     // });
   }
-  
-  function emailChecked(){
+
+  function emailChecked() {
     axios.post('http://localhost:5000/auth/emailChecked', {
       email,
       password,
@@ -46,6 +49,7 @@ function App() {
         setCode(e.target.value)
       }} />
       <button onClick={emailChecked}>sign </button>
+      <img src={QR} alt="qr code"/>
     </div>
   );
 }
