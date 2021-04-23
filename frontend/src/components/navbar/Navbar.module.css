@@ -1,0 +1,52 @@
+.nav {
+  background-color: #62a5a1;
+  width: 100%;
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+.nav h1 {
+  /* margin-left: 20px; */
+}
+
+.nav ul {
+  display: flex;
+  margin-left: 5vw;
+}
+.nav ul li {
+  margin-left: 10px;
+  text-decoration: none;
+  list-style: none;
+}
+.nav a {
+  text-decoration: none;
+  color: white;
+}
+.nav a:hover {
+  text-decoration: none;
+  color: black;
+  transition: 0.3s ease;
+}
+
+.authBtn {
+  width: 130px;
+  line-height: 1.5;
+  display: block;
+  padding: 12px 5px;
+  border-radius: 4px;
+  background: #b54484;
+  text-align: center;
+  margin-left: 10vw;
+}
+
+.nav i {
+  font-size: 24px;
+  margin-left: 2vw;
+  cursor: pointer;
+}
+
+.nav i:hover {
+  color: black;
+  transition: 0.3s ease;
+}
