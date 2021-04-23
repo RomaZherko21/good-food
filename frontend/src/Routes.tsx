@@ -1,12 +1,15 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
+import Recipes from './components/recipes/Recipes';
 
 function Routes() {
   return (
     <Router>
+      <Navbar />
       <Switch>
-        <Navbar />
-        <Route exact path="/"></Route>
+        <Route exact path="/">
+          <Recipes />
+        </Route>
       </Switch>
     </Router>
   );

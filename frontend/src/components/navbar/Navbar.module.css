@@ -5,11 +5,8 @@
   color: white;
   align-items: center;
   justify-content: center;
+  padding: 12px;
 }
-.nav h1 {
-  /* margin-left: 20px; */
-}
-
 .nav ul {
   display: flex;
   margin-left: 5vw;

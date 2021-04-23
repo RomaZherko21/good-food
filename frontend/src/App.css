@@ -1,3 +1,8 @@
 body {
   font-family: Montserrat, Georgia, serif;
 }
+* {
+  box-sizing: none;
+  margin: 0;
+  padding: 0;
+}

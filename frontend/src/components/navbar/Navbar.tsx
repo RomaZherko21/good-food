@@ -1,5 +1,5 @@
 import s from './Navbar.module.css';
-import { Link, Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Header() {
   console.log(s);
