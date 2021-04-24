@@ -1,0 +1,71 @@
+.signIn {
+  font-family: 'Original Surfer', cursive;
+  color: #62a5a1;
+  position: fixed;
+  width: 50%;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  max-width: 100%;
+  max-height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(255, 253, 253);
+  margin: 0 auto;
+  text-align: center;
+  overflow: auto;
+  text-transform: uppercase;
+}
+.signIn h1 {
+  font-size: 36px;
+}
+.signIn label {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.signIn button {
+  width: 100%;
+  background: #fdc608;
+  border: none;
+  border-radius: 6px;
+  padding: 20px;
+  margin: 20px auto 0px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  font-family: Montserrat, serif;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  max-width: 304px;
+  transition: background-color 0.2s ease;
+  -webkit-transition: background-color 0.2s ease;
+  -moz-transition: background-color 0.2s ease;
+}
+
+.signIn button:hover {
+  background: #fcd23b;
+}
+
+.signIn form {
+  display: flex;
+  flex-direction: column;
+}
+.signIn input {
+  padding: 12px;
+  background: rgb(255, 255, 255);
+  border: 1px solid gray;
+  border-radius: 5px;
+  outline: none;
+}
+
+.signIn .err {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+  font-family: serif;
+}

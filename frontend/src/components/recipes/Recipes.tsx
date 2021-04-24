@@ -1,8 +1,6 @@
 import s from './Recipes.module.css';
-import { Link } from 'react-router-dom';
 
 function Recipes() {
-  console.log(s);
   return (
     <section className={s.recipes}>
       <h1>Recipes</h1>
@@ -82,6 +80,7 @@ function Recipes() {
           <p>Paella</p>
         </div>
       </div>
+      <button>view more</button>
     </section>
   );
 }

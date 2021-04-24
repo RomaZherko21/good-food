@@ -2,7 +2,6 @@ import s from './Navbar.module.css';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  console.log(s);
   return (
     <nav className={s.nav}>
       <h1>Good F. food</h1>
@@ -21,7 +20,7 @@ function Header() {
         </li>
       </ul>
       <div className={s.authBtn}>
-        <Link to="#">Sign up</Link>/<Link to="#">Sign in</Link>
+        <Link to="signUp">Sign up</Link>/<Link to="/signIn">Sign in</Link>
       </div>
       <i className="fas fa-search"></i>
     </nav>

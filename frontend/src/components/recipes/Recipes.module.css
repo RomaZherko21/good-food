@@ -99,3 +99,25 @@
   color: #62a5a1;
   transition: 0.3s ease;
 }
+
+.recipes button {
+  font-family: Montserrat, Georgia, serif;
+  font-weight: 700;
+  font-size: 15px;
+  display: block;
+  margin: auto;
+  width: 248px;
+  height: 50px;
+  text-transform: uppercase;
+  border: 2px solid #61a5a0;
+  border-color: #61a5a0;
+  text-align: center;
+  color: #2e353c;
+  line-height: 44px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.recipes button:hover {
+  background-color: #61a5a0;
+}
