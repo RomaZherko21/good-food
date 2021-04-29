@@ -1,10 +1,13 @@
 import s from './Navbar.module.css';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AppContext } from '../../state/context';
 
 function Header() {
+  let { state, dispatch } = useContext(AppContext);
   return (
     <nav className={s.nav}>
-      <h1>Good F. food</h1>
+      <h1>Good F. food {state.shoppingCart}</h1>
       <ul>
         <li>
           <Link to="/hell">RECIPES</Link>
