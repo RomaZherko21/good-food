@@ -1,17 +1,15 @@
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import s from './SignIn.module.css';
+import axios from 'axios';
 
-type fields = {
-  email: string;
-  password: string;
+type fieldsType = {
+  email?: string;
+  password?: string;
+  token?: string;
 };
-
-const validate = (values: fields) => {
-  const errors: fields = {
-    email: '',
-    password: '',
-  };
-
+const validate = (values: fieldsType) => {
+  const errors: fieldsType = {};
   if (!values.password) {
     errors.password = 'Required';
   } else if (values.password.length > 20) {
@@ -19,61 +17,98 @@ const validate = (values: fields) => {
   } else if (values.password.length < 5) {
     errors.password = 'Must be 5 characters or more';
   }
+
   if (!values.email) {
     errors.email = 'Required';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address';
   }
 
+  if (!values.token) {
+    errors.token = 'Required';
+  } else if (!/^[0-9]{6}$/i.test(values.token)) {
+    errors.token = 'Invalid token!';
+  }
+
   return errors;
 };
 
-function SignIn() {
-  const formik = useFormik<fields>({
-    initialValues: { email: '', password: '' },
+const SignIn = () => {
+  const [data, setData] = useState({ password: '', email: '' });
+
+  const formik = useFormik({
+    initialValues: {
+      password: '',
+      email: '',
+      token: '',
+    },
     validate,
-    onSubmit: (values, e) => {
-      console.log(e);
-      console.log(values);
+    onSubmit: (values) => {
+      axios
+        .post('http://localhost:5000/auth/signIn', values)
+        .then(function (response) {
+          setData(values);
+          console.log(response);
+          document.cookie = `password=${response.data.password}`;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   });
-
   return (
     <section className={s.signIn}>
-      <h1>Sign in</h1>
-      <form action="" onSubmit={formik.handleSubmit}>
-        <label htmlFor="email">email</label>
+      <h1>Sign In</h1>
+      <form onSubmit={formik.handleSubmit}>
+        <label htmlFor="email">Email Address</label>
         <input
           id="email"
           name="email"
+          type="email"
           onChange={formik.handleChange}
           value={formik.values.email}
           onBlur={formik.handleBlur}
         />
         <span className={s.err}>
-          {' '}
           {formik.touched.email && formik.errors.email ? (
-            <div className="fields__errors">{formik.errors.email}</div>
+            <div>{formik.errors.email}</div>
           ) : null}
         </span>
+
         <label htmlFor="password">password</label>
         <input
           id="password"
           name="password"
+          type="password"
           onChange={formik.handleChange}
           value={formik.values.password}
           onBlur={formik.handleBlur}
         />
         <span className={s.err}>
-          {' '}
           {formik.touched.password && formik.errors.password ? (
-            <div className="fields__errors">{formik.errors.password}</div>
+            <div>{formik.errors.password}</div>
           ) : null}
         </span>
-        <button type="submit">sign in</button>
+
+        <label htmlFor="token">Google Authenticator token</label>
+        <input
+          id="token"
+          name="token"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.token}
+          onBlur={formik.handleBlur}
+        />
+        <span className={s.err}>
+          {formik.touched.token && formik.errors.token ? (
+            <div>{formik.errors.token}</div>
+          ) : null}
+        </span>
+
+        <button type="submit">Submit</button>
       </form>
     </section>
   );
-}
+};
 
 export default SignIn;

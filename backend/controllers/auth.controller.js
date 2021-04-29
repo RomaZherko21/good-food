@@ -10,19 +10,13 @@ const getRandomNumber = require('../helpers/getRandomNumber');
 
 class AuthController {
   async signUp(req, res, next) {
+    console.log(req.body);
     //Hashed Password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     //Email check
     let token = getRandomNumber(4);
-
-    transporter.sendMail({
-      from: process.EMAIL_NAME,
-      to: req.body.email,
-      subject: 'Code Authorization',
-      html: `Your code: <strong>${token}</strong> `,
-    });
 
     //2 step Auth
     let secret = speakeasy.generateSecret({
@@ -38,6 +32,12 @@ class AuthController {
         base32: secret.base32,
       })
         .then(({ dataValues }) => {
+          transporter.sendMail({
+            from: process.EMAIL_NAME,
+            to: req.body.email,
+            subject: 'Code Authorization',
+            html: `Your code: <strong>${token}</strong> `,
+          });
           res.status(200).send({ ...dataValues, QR: data });
         })
         .catch(() => {
@@ -81,7 +81,7 @@ class AuthController {
           token: req.body.token,
         });
 
-        if (validPassword && JSON.parse(dataValues.active).active && verified) {
+        if (validPassword && dataValues.active && verified) {
           res.status(200).send({ ...dataValues });
         } else {
           return next(createError(401, `Wrong data!`));
@@ -93,6 +93,7 @@ class AuthController {
   }
   cookie(req, res, next) {
     let cookie = req.cookies.password;
+    console.log(cookie);
     if (cookie !== undefined) {
       Customer.findOne({ where: { password: cookie } })
         .then(async ({ dataValues }) => {

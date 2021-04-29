@@ -68,3 +68,26 @@
   text-align: left;
   font-family: serif;
 }
+
+.additAuth p {
+  font-size: 14px;
+  color: rgb(43, 184, 0);
+  font-family: serif;
+  text-align: left;
+  text-transform: lowercase;
+}
+.emailChecked {
+  margin-top: 30px;
+}
+.emailChecked input {
+  width: 100%;
+}
+.emailChecked button {
+  padding: 10px;
+  margin: 0;
+  margin-top: 12px;
+  width: auto;
+}
+.qr {
+  margin-top: 30px;
+}
