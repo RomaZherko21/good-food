@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import s from './SignIn.module.css';
 import axios from 'axios';
+import { AppContext } from '../../state/context';
+import { Types } from '../../state/reducers';
 
 type fieldsType = {
   email?: string;
@@ -34,7 +36,8 @@ const validate = (values: fieldsType) => {
 };
 
 const SignIn = () => {
-  const [data, setData] = useState({ password: '', email: '' });
+  const { state, dispatch } = useContext(AppContext);
+  const [err, setErr] = useState('');
 
   const formik = useFormik({
     initialValues: {
@@ -47,9 +50,20 @@ const SignIn = () => {
       axios
         .post('http://localhost:5000/auth/signIn', values)
         .then(function (response) {
-          setData(values);
-          console.log(response);
-          document.cookie = `password=${response.data.password}`;
+          if (response.data.status === 200) {
+            document.cookie = `password=${response.data.password}`;
+            dispatch({
+              type: Types.SignIn,
+              payload: {
+                email: response.data.email,
+                id: response.data.id,
+                logedIn: true,
+              },
+            });
+            window.history.back();
+          } else {
+            setErr(response.data.message);
+          }
         })
         .catch(function (error) {
           console.log(error);
@@ -106,6 +120,7 @@ const SignIn = () => {
         </span>
 
         <button type="submit">Submit</button>
+        <span className={s.err}>{err}</span>
       </form>
     </section>
   );

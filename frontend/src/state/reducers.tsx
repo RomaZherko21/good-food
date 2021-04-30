@@ -1,71 +1,100 @@
-import { ProductType } from "../types";
+import { ProductType, UserType } from '../types';
 
 type ActionMap<M extends { [index: string]: any }> = {
-    [Key in keyof M]: M[Key] extends undefined
-      ? {
-          type: Key;
-        }
-      : {
-          type: Key;
-          payload: M[Key];
-        }
-  };
-  
-  export enum Types {
-    Create = 'CREATE_PRODUCT',
-    Delete = 'DELETE_PRODUCT',
-    Add = 'ADD_PRODUCT',
-  }
-  
-  // Product
+  [Key in keyof M]: M[Key] extends undefined
+    ? {
+        type: Key;
+      }
+    : {
+        type: Key;
+        payload: M[Key];
+      };
+};
 
-  
-  type ProductPayload = {
-    [Types.Create] : {
-      id: number;
-      name: string;
-      price: number;
-    };
-    [Types.Delete]: {
-      id: number;
-    }
+export enum Types {
+  Create = 'CREATE_PRODUCT',
+  Delete = 'DELETE_PRODUCT',
+  Add = 'ADD_PRODUCT',
+  SignIn = 'SIGN_IN',
+}
+
+// Product
+
+type ProductPayload = {
+  [Types.Create]: {
+    id: number;
+    name: string;
+    price: number;
+  };
+  [Types.Delete]: {
+    id: number;
+  };
+};
+
+export type ProductActionsType = ActionMap<ProductPayload>[keyof ActionMap<ProductPayload>];
+
+export const productReducer = (
+  state: ProductType[],
+  action: ProductActionsType | ShoppingCartActionsType | UserActionsType
+) => {
+  switch (action.type) {
+    case Types.Create:
+      return [
+        ...state,
+        {
+          id: action.payload.id,
+          name: action.payload.name,
+          price: action.payload.price,
+        },
+      ];
+    case Types.Delete:
+      return [...state.filter((product) => product.id !== action.payload.id)];
+    default:
+      return state;
   }
-  
-  export type ProductActions = ActionMap<ProductPayload>[keyof ActionMap<ProductPayload>];
-  
-  export const productReducer = (state: ProductType[], action: ProductActions | ShoppingCartActions) => {
-    switch (action.type) {
-      case Types.Create:
-        return [
-          ...state,
-          {
-            id: action.payload.id,
-            name: action.payload.name,
-            price: action.payload.price,
-          }
-        ]
-      case Types.Delete:
-        return [
-          ...state.filter(product => product.id !== action.payload.id),
-        ]
-      default:
-        return state;
-    }
+};
+
+// ShoppingCart
+
+type ShoppingCartPayload = {
+  [Types.Add]: undefined;
+};
+
+export type ShoppingCartActionsType = ActionMap<ShoppingCartPayload>[keyof ActionMap<ShoppingCartPayload>];
+
+export const shoppingCartReducer = (
+  state: number,
+  action: ProductActionsType | ShoppingCartActionsType | UserActionsType
+) => {
+  switch (action.type) {
+    case Types.Add:
+      return state + 1;
+    default:
+      return state;
   }
-  
-  // ShoppingCart
-  
-  type ShoppingCartPayload = {
-    [Types.Add]: undefined;
+};
+// User
+
+type UserPayload = {
+  [Types.SignIn]: UserType;
+};
+
+export type UserActionsType = ActionMap<UserPayload>[keyof ActionMap<UserPayload>];
+
+export const userReducer = (
+  state: UserType,
+  action: ProductActionsType | ShoppingCartActionsType | UserActionsType
+) => {
+  switch (action.type) {
+    case Types.SignIn:
+      console.log('AM herer', action.payload);
+      return {
+        ...state,
+        email: action.payload.email || '',
+        id: action.payload.id || '',
+        logedIn: action.payload.logedIn || false,
+      };
+    default:
+      return state;
   }
-  
-  export type ShoppingCartActions = ActionMap<ShoppingCartPayload>[keyof ActionMap<ShoppingCartPayload>];
-  
-  export const shoppingCartReducer = (state: number, action: ProductActions | ShoppingCartActions) => {
-    switch (action.type) {
-      case Types.Add:
-        return state + 1;
-      default:
-        return state;
-    }
-  }
+};

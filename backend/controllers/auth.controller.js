@@ -10,7 +10,6 @@ const getRandomNumber = require('../helpers/getRandomNumber');
 
 class AuthController {
   async signUp(req, res, next) {
-    console.log(req.body);
     //Hashed Password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -38,7 +37,7 @@ class AuthController {
             subject: 'Code Authorization',
             html: `Your code: <strong>${token}</strong> `,
           });
-          res.status(200).send({ ...dataValues, QR: data });
+          res.status(200).send({ ...dataValues, QR: data, status: 200 });
         })
         .catch(() => {
           return next(createError(401, `This email is already exist!`));
@@ -53,8 +52,12 @@ class AuthController {
             { active: 'true' },
             { where: { email: req.body.email } }
           )
-            .then(function (rowsUpdated) {
-              res.json(rowsUpdated);
+            .then(function () {
+              res.status(200).json({
+                email: dataValues.email,
+                id: dataValues.id,
+                status: 200,
+              });
             })
             .catch(() => {
               return next(createError(500, `User was not updated!`));
@@ -82,7 +85,9 @@ class AuthController {
         });
 
         if (validPassword && dataValues.active && verified) {
-          res.status(200).send({ ...dataValues });
+          res
+            .status(200)
+            .json({ email: dataValues.email, id: dataValues.id, status: 200 });
         } else {
           return next(createError(401, `Wrong data!`));
         }

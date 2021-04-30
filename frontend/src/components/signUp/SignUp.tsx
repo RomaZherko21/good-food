@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import s from './SignUp.module.css';
 import axios from 'axios';
+import { AppContext } from '../../state/context';
+import { Types } from '../../state/reducers';
 
 type fieldsType = {
   email?: string;
@@ -32,6 +34,8 @@ const SignUp = () => {
   const [data, setData] = useState({ password: '', email: '' });
   const [token, setToken] = useState('');
   const [QR, setQR] = useState('');
+  const { state, dispatch } = useContext(AppContext);
+  const [err, setErr] = useState('');
 
   const formik = useFormik({
     initialValues: {
@@ -43,21 +47,23 @@ const SignUp = () => {
       axios
         .post('http://localhost:5000/auth/signUp', values)
         .then(function (response) {
-          setShowFields(true);
-          setQR(response.data.QR);
-          setData(values);
-          console.log(response);
+          if (response.data.status === 200) {
+            setShowFields(true);
+            setQR(response.data.QR);
+            setData(values);
+          } else {
+            setErr(response.data.message);
+          }
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function (err) {
+          console.log(err);
         });
-      console.log(values);
     },
   });
 
   return (
     <section className={s.signUp}>
-      <h1>Sign Up</h1>
+      <h1>Sign Up {state.user.email}</h1>
 
       {showFields ? (
         <div className={s.additAuth}>
@@ -82,23 +88,36 @@ const SignUp = () => {
                     token,
                   })
                   .then(function (response) {
-                    setShowFields(false);
-                    setQR('');
-                    document.cookie = `password=${response.data.password}`;
-                    console.log(response);
+                    if (response.data.status === 200) {
+                      setShowFields(false);
+                      setQR('');
+                      document.cookie = `password=${response.data.password}`;
+                      dispatch({
+                        type: Types.SignIn,
+                        payload: {
+                          email: response.data.email,
+                          id: response.data.id,
+                          logedIn: true,
+                        },
+                      });
+                      window.history.back();
+                    } else {
+                      setErr(response.data.message);
+                    }
                   })
-                  .catch(function (error) {
-                    console.log(error);
+                  .catch(function (err) {
+                    console.log(err);
                   });
               }}
             >
-              Send code
+              Submit
             </button>
           </div>
           <div className={s.qr}>
             <img src={QR} alt="QR" />
             <p>Please, scan this QR code with Google Authenticator app!!!</p>
           </div>
+          <span className={s.err}>{err}</span>
         </div>
       ) : (
         <form onSubmit={formik.handleSubmit}>
@@ -133,6 +152,7 @@ const SignUp = () => {
           </span>
 
           <button type="submit">Submit</button>
+          <span className={s.err}>{err}</span>
         </form>
       )}
     </section>

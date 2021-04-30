@@ -1,22 +1,9 @@
 import s from './Recipes.module.css';
-import { AppContext } from '../../state/context';
-import { useContext } from 'react';
-import { Types } from '../.././state/reducers';
 
 function Recipes() {
-  let { state, dispatch } = useContext(AppContext);
   return (
     <section className={s.recipes}>
-      <h1>Recipes {state.shoppingCart}</h1>
-      <button
-        onClick={() => {
-          dispatch({
-            type: Types.Add,
-          });
-        }}
-      >
-        CLICK MEEEE
-      </button>
+      <h1>Recipes</h1>
       <h3>GET COOKING & SHARING</h3>
       <ul className={s.filters}>
         <span>FILTER BY:</span>

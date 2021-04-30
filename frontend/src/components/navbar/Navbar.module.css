@@ -46,3 +46,18 @@
   color: black;
   transition: 0.3s ease;
 }
+.profile {
+  margin-left: 10px;
+}
+.profile i {
+  margin-left: 5px;
+}
+.profile a {
+  position: relative;
+}
+
+.cartAmount {
+  position: absolute;
+  top: -19px;
+  right: -6px;
+}
