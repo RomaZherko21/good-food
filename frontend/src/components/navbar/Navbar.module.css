@@ -47,10 +47,17 @@
   transition: 0.3s ease;
 }
 .profile {
-  margin-left: 10px;
+  line-height: 1.5;
+  display: block;
+  padding: 12px 12px;
+  border-radius: 4px;
+  background: #b54484;
+  text-align: center;
+  margin-left: 10vw;
 }
 .profile i {
   margin-left: 5px;
+  margin-right: 5px;
 }
 .profile a {
   position: relative;
@@ -59,5 +66,5 @@
 .cartAmount {
   position: absolute;
   top: -19px;
-  right: -6px;
+  right: -2px;
 }

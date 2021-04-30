@@ -8,7 +8,9 @@ function Header() {
   const { state, dispatch } = useContext(AppContext);
   return (
     <nav className={s.nav}>
-      <h1>Good F. food</h1>
+      <h1>
+        <Link to="/">Good F. food</Link>
+      </h1>
       <ul>
         <li>
           <Link to="/hell">RECIPES</Link>
@@ -30,7 +32,7 @@ function Header() {
             <i className="fas fa-user"></i>
           </Link>
           <Link to="shoppingCart">
-            <i className="fas fa-shopping-cart"></i>
+            <i className="fas fa-pizza-slice"></i>
             <div className={s.cartAmount}>0</div>
           </Link>
           <i

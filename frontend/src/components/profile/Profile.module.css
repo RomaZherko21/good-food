@@ -1,0 +1,26 @@
+.profile {
+  background: url(//cdn.jamieoliver.com/library/images/signup/bg.jpg);
+  width: 100vw;
+  height: 100vh;
+}
+.profile i {
+  font-size: 26px;
+  cursor: pointer;
+  transition: 0.1s ease all;
+}
+.profile i:hover {
+  color: #62a5a1;
+}
+.profile a {
+  color: black;
+  text-decoration: none;
+}
+.profileInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 20px;
+}
+.profileInfo h3 {
+  font-size: 16px;
+}
