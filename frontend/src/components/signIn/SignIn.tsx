@@ -1,17 +1,14 @@
-import { useContext, useState } from 'react';
-import { useFormik } from 'formik';
 import s from './SignIn.module.css';
-import axios from 'axios';
+import React, { useContext, useState } from 'react';
+import { useFormik } from 'formik';
+
 import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
+import { AuthFieldsType } from '../../types';
+import { authAPI } from '../../api/authAPI';
 
-type fieldsType = {
-  email?: string;
-  password?: string;
-  token?: string;
-};
-const validate = (values: fieldsType) => {
-  const errors: fieldsType = {};
+const validate = (values: AuthFieldsType) => {
+  const errors = {} as AuthFieldsType;
   if (!values.password) {
     errors.password = 'Required';
   } else if (values.password.length > 20) {
@@ -35,9 +32,9 @@ const validate = (values: fieldsType) => {
   return errors;
 };
 
-const SignIn = () => {
-  const { state, dispatch } = useContext(AppContext);
-  const [err, setErr] = useState('');
+const SignIn: React.FC = () => {
+  const [err, setErr] = useState<string>('');
+  const { dispatch } = useContext(AppContext);
 
   const formik = useFormik({
     initialValues: {
@@ -47,27 +44,25 @@ const SignIn = () => {
     },
     validate,
     onSubmit: (values) => {
-      axios
-        .post('http://localhost:5000/auth/signIn', values)
-        .then(function (response) {
-          if (response.data.status === 200) {
-            document.cookie = `password=${response.data.password}`;
-            dispatch({
-              type: Types.SignIn,
-              payload: {
-                email: response.data.email,
-                id: response.data.id,
-                logedIn: true,
-              },
-            });
-            window.history.back();
-          } else {
-            setErr(response.data.message);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      authAPI(
+        '/auth/signIn',
+        values,
+        (response) => {
+          document.cookie = `password=${response.data.password}`;
+          dispatch({
+            type: Types.SignIn,
+            payload: {
+              email: response.data.email,
+              id: response.data.id,
+              logedIn: true,
+            },
+          });
+          window.history.back();
+        },
+        (message) => {
+          setErr(message);
+        }
+      );
     },
   });
   return (

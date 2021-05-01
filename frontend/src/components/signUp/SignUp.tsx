@@ -1,17 +1,14 @@
+import s from './SignUp.module.css';
 import { useState, useContext } from 'react';
 import { useFormik } from 'formik';
-import s from './SignUp.module.css';
-import axios from 'axios';
+
 import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
+import { AuthFieldsType } from '../../types';
+import { authAPI } from '../../api/authAPI';
 
-type fieldsType = {
-  email?: string;
-  password?: string;
-};
-
-const validate = (values: fieldsType) => {
-  const errors: fieldsType = {};
+const validate = (values: AuthFieldsType) => {
+  const errors = {} as AuthFieldsType;
   if (!values.password) {
     errors.password = 'Required';
   } else if (values.password.length > 20) {
@@ -29,13 +26,13 @@ const validate = (values: fieldsType) => {
   return errors;
 };
 
-const SignUp = () => {
-  const [showFields, setShowFields] = useState(false);
-  const [data, setData] = useState({ password: '', email: '' });
-  const [token, setToken] = useState('');
-  const [QR, setQR] = useState('');
-  const { state, dispatch } = useContext(AppContext);
-  const [err, setErr] = useState('');
+const SignUp: React.FC = () => {
+  const [showFields, setShowFields] = useState<boolean>(false);
+  const [data, setData] = useState<AuthFieldsType>({ password: '', email: '' });
+  const [token, setToken] = useState<string>('');
+  const [QR, setQR] = useState<string>('');
+  const [err, setErr] = useState<string>('');
+  const { dispatch } = useContext(AppContext);
 
   const formik = useFormik({
     initialValues: {
@@ -44,26 +41,24 @@ const SignUp = () => {
     },
     validate,
     onSubmit: (values) => {
-      axios
-        .post('http://localhost:5000/auth/signUp', values)
-        .then(function (response) {
-          if (response.data.status === 200) {
-            setShowFields(true);
-            setQR(response.data.QR);
-            setData(values);
-          } else {
-            setErr(response.data.message);
-          }
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+      authAPI(
+        '/auth/signUp',
+        values,
+        (response) => {
+          setShowFields(true);
+          setQR(response.data.QR);
+          setData(values);
+        },
+        (message) => {
+          setErr(message);
+        }
+      );
     },
   });
 
   return (
     <section className={s.signUp}>
-      <h1>Sign Up {state.user.email}</h1>
+      <h1>Sign Up</h1>
 
       {showFields ? (
         <div className={s.additAuth}>
@@ -81,33 +76,29 @@ const SignUp = () => {
               submit!
             </p>
             <button
-              onClick={() => {
-                axios
-                  .post('http://localhost:5000/auth/emailChecked', {
+              onClick={(event) => {
+                authAPI(
+                  '/auth/emailChecked',
+                  {
                     ...data,
                     token,
-                  })
-                  .then(function (response) {
-                    if (response.data.status === 200) {
-                      setShowFields(false);
-                      setQR('');
-                      document.cookie = `password=${response.data.password}`;
-                      dispatch({
-                        type: Types.SignIn,
-                        payload: {
-                          email: response.data.email,
-                          id: response.data.id,
-                          logedIn: true,
-                        },
-                      });
-                      window.history.back();
-                    } else {
-                      setErr(response.data.message);
-                    }
-                  })
-                  .catch(function (err) {
-                    console.log(err);
-                  });
+                  },
+                  (response) => {
+                    document.cookie = `password=${response.data.password}`;
+                    dispatch({
+                      type: Types.SignIn,
+                      payload: {
+                        email: response.data.email,
+                        id: response.data.id,
+                        logedIn: true,
+                      },
+                    });
+                    window.history.back();
+                  },
+                  (message) => {
+                    setErr(message);
+                  }
+                );
               }}
             >
               Submit

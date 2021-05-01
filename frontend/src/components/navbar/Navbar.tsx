@@ -1,11 +1,13 @@
 import s from './Navbar.module.css';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../../state/context';
 import { useContext } from 'react';
+
+import { AppContext, initialState } from '../../state/context';
 import { Types } from '../../state/reducers';
 
-function Header() {
+const Header: React.FC = () => {
   const { state, dispatch } = useContext(AppContext);
+
   return (
     <nav className={s.nav}>
       <h1>
@@ -13,7 +15,7 @@ function Header() {
       </h1>
       <ul>
         <li>
-          <Link to="/hell">RECIPES</Link>
+          <Link to="#">RECIPES</Link>
         </li>
         <li>
           <Link to="#">DISCOVER</Link>
@@ -40,11 +42,7 @@ function Header() {
             onClick={() => {
               dispatch({
                 type: Types.SignIn,
-                payload: {
-                  email: '',
-                  id: '',
-                  logedIn: false,
-                },
+                payload: { ...initialState.user },
               });
             }}
           ></i>
@@ -54,10 +52,9 @@ function Header() {
           <Link to="signUp">Sign up</Link> / <Link to="/signIn">Sign in</Link>
         </div>
       )}
-
       <i className="fas fa-search"></i>
     </nav>
   );
-}
+};
 
 export default Header;

@@ -15,7 +15,7 @@ type InitialStateType = {
   user: UserType;
 };
 
-const initialState = {
+export const initialState = {
   products: [],
   shoppingCart: 0,
   user: { email: '', id: '', logedIn: false },
