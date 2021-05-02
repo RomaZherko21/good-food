@@ -12,7 +12,7 @@ const Profile = () => {
       <div className={s.profileInfo}>
         <h3>{state.user.email}</h3>
         <span>ID: {state.user.id}</span>
-        <Link to="/profile/settings">
+        <Link to="/profile/customization">
           <i className="fas fa-cogs"></i>
         </Link>
       </div>

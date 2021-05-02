@@ -57,6 +57,7 @@ class AuthController {
                 email: dataValues.email,
                 id: dataValues.id,
                 status: 200,
+                meta: dataValues.meta,
               });
             })
             .catch(() => {
@@ -83,11 +84,14 @@ class AuthController {
           encoding: 'base32',
           token: req.body.token,
         });
-
+        console.log(validPassword, verified, dataValues.active);
         if (validPassword && dataValues.active && verified) {
-          res
-            .status(200)
-            .json({ email: dataValues.email, id: dataValues.id, status: 200 });
+          res.status(200).json({
+            email: dataValues.email,
+            id: dataValues.id,
+            status: 200,
+            meta: dataValues.meta,
+          });
         } else {
           return next(createError(401, `Wrong data!`));
         }
@@ -98,14 +102,13 @@ class AuthController {
   }
   cookie(req, res, next) {
     let cookie = req.cookies.password;
-    console.log(cookie);
     if (cookie !== undefined) {
       Customer.findOne({ where: { password: cookie } })
         .then(async ({ dataValues }) => {
           res.status(200).send({ ...dataValues });
         })
         .catch(() => {
-          res.status(200).send('Wrong Cookies!');
+          return next(createError(401, `Wrong Cookies!`));
         });
     } else {
       res.send('No Cookies!');

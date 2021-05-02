@@ -58,6 +58,7 @@ const SignIn: React.FC = () => {
             },
           });
           window.history.back();
+          console.log(response.data);
         },
         (message) => {
           setErr(message);

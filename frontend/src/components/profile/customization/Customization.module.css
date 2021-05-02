@@ -1,0 +1,125 @@
+.customization {
+  background: url(//cdn.jamieoliver.com/library/images/signup/bg.jpg);
+  height: 100vh;
+}
+.customization h1 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  color: #61a5a0;
+  line-height: 1.1;
+  font-weight: 400;
+  font-size: 45px;
+  padding: 90px 0 0;
+  text-align: center;
+}
+.customization p {
+  text-align: center;
+  margin: 0 0 25px;
+  width: 90%;
+  margin: 20px auto 40px;
+}
+.customization form {
+  display: flex;
+  width: 70vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.customization input {
+  width: 100%;
+  padding: 12px 2px;
+  background: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+  outline: none;
+}
+.customization select {
+  width: 100%;
+  padding: 12px 0px;
+  background: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.customization .checkboxGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: 60px;
+  margin: 0;
+  top: 0;
+}
+.customization .checkboxGroup label {
+  position: relative;
+  width: 100px;
+}
+.customization .checkboxGroup input {
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+  position: absolute;
+  width: 100px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+}
+.customization .checkboxGroup p {
+  margin: 0;
+  top: 5px;
+  width: 100px;
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+}
+.customization button {
+  width: 100%;
+  background: #fdc608;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  margin: 0 auto;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  font-family: Montserrat, serif;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  width: auto;
+  transition: background-color 0.2s ease;
+  -webkit-transition: background-color 0.2s ease;
+  -moz-transition: background-color 0.2s ease;
+  margin-top: 26px;
+}
+
+.customization .err {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+  font-family: serif;
+}
+.customization label {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: lowercase;
+  color: #61a5a0;
+  line-height: 1.1;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+  align-self: start;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}

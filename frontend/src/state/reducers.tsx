@@ -87,7 +87,6 @@ export const userReducer = (
 ) => {
   switch (action.type) {
     case Types.SignIn:
-      console.log('AM herer', action.payload);
       return {
         ...state,
         email: action.payload.email || '',

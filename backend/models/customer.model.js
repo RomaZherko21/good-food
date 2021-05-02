@@ -19,6 +19,11 @@ const Customer = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    meta: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: '{}',
+    },
     active: {
       type: DataTypes.STRING,
       allowNull: true,

@@ -76,7 +76,7 @@ const SignUp: React.FC = () => {
               submit!
             </p>
             <button
-              onClick={(event) => {
+              onClick={() => {
                 authAPI(
                   '/auth/emailChecked',
                   {
