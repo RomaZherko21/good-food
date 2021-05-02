@@ -55,6 +55,7 @@ const SignIn: React.FC = () => {
               email: response.data.email,
               id: response.data.id,
               logedIn: true,
+              meta: JSON.stringify(response.data.meta),
             },
           });
           window.history.back();

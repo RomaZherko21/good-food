@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const { state, dispatch } = useContext(AppContext);
-
   return (
     <section className={s.profile}>
       <div className={s.profileInfo}>
@@ -15,6 +14,7 @@ const Profile = () => {
         <Link to="/profile/customization">
           <i className="fas fa-cogs"></i>
         </Link>
+        <div>{state.user.meta}</div>
       </div>
     </section>
   );

@@ -8,6 +8,14 @@ export type UserType = {
   logedIn: boolean;
   id: string;
   email: string;
+  meta?: string;
+};
+export type MetaFieldsType = {
+  name: string | '';
+  surname: string | '';
+  country: string | '';
+  birthday: string | '';
+  diet: string[];
 };
 
 export type AuthFieldsType = {

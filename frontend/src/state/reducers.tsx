@@ -16,6 +16,7 @@ export enum Types {
   Delete = 'DELETE_PRODUCT',
   Add = 'ADD_PRODUCT',
   SignIn = 'SIGN_IN',
+  MetaChange = 'META_CHANGE',
 }
 
 // Product
@@ -77,6 +78,7 @@ export const shoppingCartReducer = (
 
 type UserPayload = {
   [Types.SignIn]: UserType;
+  [Types.MetaChange]: UserType;
 };
 
 export type UserActionsType = ActionMap<UserPayload>[keyof ActionMap<UserPayload>];
@@ -92,6 +94,11 @@ export const userReducer = (
         email: action.payload.email || '',
         id: action.payload.id || '',
         logedIn: action.payload.logedIn || false,
+      };
+    case Types.MetaChange:
+      return {
+        ...state,
+        meta: action.payload.meta,
       };
     default:
       return state;

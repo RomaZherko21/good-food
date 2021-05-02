@@ -1,29 +1,21 @@
 const Customer = require('../models/customer.model');
+const createError = require('http-errors');
 
 class CustomersController {
-  postCustomer(req, res) {
-    res.send('postCustomer');
-  }
-  getCustomer(req, res) {
-    res.send('hello');
-  }
-  getCustomers(req, res) {
-    Customer.findAll({ raw: true })
-      .then((customers) => {
-        res.status(200).send(customers);
+  putCustomerMeta(req, res, next) {
+    Customer.update(
+      { meta: req.body.meta },
+      { where: { email: req.body.email } }
+    )
+      .then(() => {
+        res.status(200).json({
+          status: 200,
+          message: 'Customer was updated!',
+        });
       })
       .catch(() => {
-        return next(
-          createError(500, `Server error: customers was not founded!`)
-        );
+        return next(createError(401, `Wrong email!`));
       });
-  }
-
-  getCustomerAccounts(req, res) {
-    res.send('/customers/:customerId/accounts');
-  }
-  getCustomerAccount(req, res) {
-    res.send('/customers/:customerId/accounts/:accountId');
   }
 }
 

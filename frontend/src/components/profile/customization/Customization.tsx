@@ -1,20 +1,27 @@
 import s from './Customization.module.css';
-import React from 'react';
 import { Formik, Form, Field } from 'formik';
+import React, { useContext, useState } from 'react';
+
+import { customerAPI } from '../../../api/authAPI';
+import { AppContext } from '../../../state/context';
+import { MetaFieldsType } from '../../../types';
+import { Types } from '../../../state/reducers';
 
 const validateName = (value: string) => {
-  let errors = '';
+  let errors: string = '';
   if (!value) {
     errors = 'Required';
   } else if (value.length > 20) {
     errors = 'Must be 20 characters or less';
-  } else if (value.length < 4) {
+  } else if (value.length < 2) {
     errors = 'Must be 2 characters or more';
+  } else if (!/^[a-z]*$/i.test(value)) {
+    errors = 'Must be ENG vocabulary';
   }
   return errors;
 };
 const validateBirthday = (value: string) => {
-  let errors = '';
+  let errors: string = '';
   if (!value) {
     errors = 'Required';
   } else if (!/^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/i.test(value)) {
@@ -24,6 +31,9 @@ const validateBirthday = (value: string) => {
 };
 
 const Customization = () => {
+  const [err, setErr] = useState<string>('');
+  const { state, dispatch } = useContext(AppContext);
+
   return (
     <section className={s.customization}>
       <h1>PROFILE</h1>
@@ -38,12 +48,28 @@ const Customization = () => {
           surname: '',
           country: '',
           birthday: '',
-          checked: [],
-          toggle: false,
+          diet: [],
         }}
-        onSubmit={(values) => {
-          console.log(values);
-          console.log(values.checked.find((item) => item === 'One'));
+        onSubmit={(values: MetaFieldsType) => {
+          customerAPI(
+            '/customers/changeMeta',
+            { ...state.user, meta: JSON.stringify(values) },
+            () => {
+              dispatch({
+                type: Types.MetaChange,
+                payload: {
+                  email: state.user.email,
+                  id: state.user.id,
+                  logedIn: state.user.logedIn,
+                  meta: JSON.stringify(values),
+                },
+              });
+              window.history.back();
+            },
+            (message) => {
+              setErr(message);
+            }
+          );
         }}
       >
         {({ errors, touched, values }) => (
@@ -79,17 +105,17 @@ const Customization = () => {
               <label>
                 <Field
                   type="checkbox"
-                  name="checked"
+                  name="diet"
                   value="GluetenFree"
                   style={
-                    values.checked.find((item) => item === 'GluetenFree')
+                    values.diet.find((item) => item === 'GluetenFree')
                       ? { backgroundColor: '#61a5a0' }
                       : { backgroundColor: 'inherit' }
                   }
                 />
                 <p
                   style={
-                    values.checked.find((item) => item === 'GluetenFree')
+                    values.diet.find((item) => item === 'GluetenFree')
                       ? { color: 'white' }
                       : { color: 'inherit' }
                   }
@@ -100,17 +126,17 @@ const Customization = () => {
               <label>
                 <Field
                   type="checkbox"
-                  name="checked"
+                  name="diet"
                   value="Vegeterian"
                   style={
-                    values.checked.find((item) => item === 'Vegeterian')
+                    values.diet.find((item) => item === 'Vegeterian')
                       ? { backgroundColor: '#61a5a0' }
                       : { backgroundColor: 'inherit' }
                   }
                 />
                 <p
                   style={
-                    values.checked.find((item) => item === 'Vegeterian')
+                    values.diet.find((item) => item === 'Vegeterian')
                       ? { color: 'white' }
                       : { color: 'inherit' }
                   }
@@ -121,17 +147,17 @@ const Customization = () => {
               <label>
                 <Field
                   type="checkbox"
-                  name="checked"
+                  name="diet"
                   value="Vegan"
                   style={
-                    values.checked.find((item) => item === 'Vegan')
+                    values.diet.find((item) => item === 'Vegan')
                       ? { backgroundColor: '#61a5a0' }
                       : { backgroundColor: 'inherit' }
                   }
                 />
                 <p
                   style={
-                    values.checked.find((item) => item === 'Vegan')
+                    values.diet.find((item) => item === 'Vegan')
                       ? { color: 'white' }
                       : { color: 'inherit' }
                   }
@@ -142,17 +168,17 @@ const Customization = () => {
               <label>
                 <Field
                   type="checkbox"
-                  name="checked"
+                  name="diet"
                   value="DairyFree"
                   style={
-                    values.checked.find((item) => item === 'DairyFree')
+                    values.diet.find((item) => item === 'DairyFree')
                       ? { backgroundColor: '#61a5a0' }
                       : { backgroundColor: 'inherit' }
                   }
                 />
                 <p
                   style={
-                    values.checked.find((item) => item === 'DairyFree')
+                    values.diet.find((item) => item === 'DairyFree')
                       ? { color: 'white' }
                       : { color: 'inherit' }
                   }
@@ -162,6 +188,7 @@ const Customization = () => {
               </label>
             </div>
             <button type="submit">Save and Update</button>
+            <span className={s.err}>{err}</span>
           </Form>
         )}
       </Formik>

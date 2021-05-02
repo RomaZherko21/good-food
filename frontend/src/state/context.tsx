@@ -18,7 +18,12 @@ type InitialStateType = {
 export const initialState = {
   products: [],
   shoppingCart: 0,
-  user: { email: '', id: '', logedIn: false },
+  user: {
+    email: '',
+    id: '',
+    logedIn: false,
+    meta: '',
+  },
 };
 
 const AppContext = createContext<{
@@ -42,7 +47,6 @@ const mainReducer = (
 
 const AppProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
-  let showState = state;
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}

@@ -57,7 +57,7 @@ class AuthController {
                 email: dataValues.email,
                 id: dataValues.id,
                 status: 200,
-                meta: dataValues.meta,
+                meta: '{}',
               });
             })
             .catch(() => {
@@ -84,7 +84,7 @@ class AuthController {
           encoding: 'base32',
           token: req.body.token,
         });
-        console.log(validPassword, verified, dataValues.active);
+        console.log('SignIN:', validPassword, verified, dataValues.active);
         if (validPassword && dataValues.active && verified) {
           res.status(200).json({
             email: dataValues.email,
