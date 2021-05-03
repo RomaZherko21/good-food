@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
 import { AuthFieldsType } from '../../types';
-import { authAPI } from '../../api/authAPI';
+import { serverAPI } from '../../api/serverAPI';
 
 const validate = (values: AuthFieldsType) => {
   const errors = {} as AuthFieldsType;
@@ -44,22 +44,22 @@ const SignIn: React.FC = () => {
     },
     validate,
     onSubmit: (values) => {
-      authAPI(
+      serverAPI<AuthFieldsType>(
         '/auth/signIn',
         values,
         (response) => {
           document.cookie = `password=${response.data.password}`;
+          console.log(response.data);
           dispatch({
             type: Types.SignIn,
             payload: {
               email: response.data.email,
               id: response.data.id,
               logedIn: true,
-              meta: JSON.stringify(response.data.meta),
+              meta: JSON.parse(response.data.meta),
             },
           });
           window.history.back();
-          console.log(response.data);
         },
         (message) => {
           setErr(message);

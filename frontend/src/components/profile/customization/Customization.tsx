@@ -2,10 +2,12 @@ import s from './Customization.module.css';
 import { Formik, Form, Field } from 'formik';
 import React, { useContext, useState } from 'react';
 
-import { customerAPI } from '../../../api/authAPI';
+import { serverAPI } from '../../../api/serverAPI';
 import { AppContext } from '../../../state/context';
-import { MetaFieldsType } from '../../../types';
+import { MetaDataType } from '../../../types';
 import { Types } from '../../../state/reducers';
+
+import { UserType } from '../../../types';
 
 const validateName = (value: string) => {
   let errors: string = '';
@@ -50,18 +52,16 @@ const Customization = () => {
           birthday: '',
           diet: [],
         }}
-        onSubmit={(values: MetaFieldsType) => {
-          customerAPI(
-            '/customers/changeMeta',
+        onSubmit={(values: MetaDataType) => {
+          serverAPI<UserType>(
+            '/customers/changeMetaData',
             { ...state.user, meta: JSON.stringify(values) },
             () => {
               dispatch({
                 type: Types.MetaChange,
                 payload: {
-                  email: state.user.email,
-                  id: state.user.id,
-                  logedIn: state.user.logedIn,
-                  meta: JSON.stringify(values),
+                  ...state.user,
+                  meta: { ...values },
                 },
               });
               window.history.back();

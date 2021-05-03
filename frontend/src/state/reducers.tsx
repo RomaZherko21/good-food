@@ -94,6 +94,7 @@ export const userReducer = (
         email: action.payload.email || '',
         id: action.payload.id || '',
         logedIn: action.payload.logedIn || false,
+        meta: action.payload.meta || '{}',
       };
     case Types.MetaChange:
       return {

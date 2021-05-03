@@ -1,5 +1,5 @@
 import s from './Navbar.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 
 import { AppContext, initialState } from '../../state/context';
@@ -11,32 +11,42 @@ const Header: React.FC = () => {
   return (
     <nav className={s.nav}>
       <h1>
-        <Link to="/">Good F. food</Link>
+        <NavLink exact to="/">
+          Good F. food
+        </NavLink>
       </h1>
       <ul>
         <li>
-          <Link to="#">RECIPES</Link>
+          <NavLink exact to="#">
+            RECIPES
+          </NavLink>
         </li>
         <li>
-          <Link to="#">DISCOVER</Link>
+          <NavLink exact to="#">
+            DISCOVER
+          </NavLink>
         </li>
         <li>
-          <Link to="#">NUTRITION</Link>
+          <NavLink exact to="#">
+            NUTRITION
+          </NavLink>
         </li>
         <li>
-          <Link to="#">VIDEO</Link>
+          <NavLink exact to="#">
+            VIDEO
+          </NavLink>
         </li>
       </ul>
 
       {state.user.logedIn ? (
         <div className={s.profile}>
-          <Link to="profile">
+          <NavLink exact to="/profile">
             <i className="fas fa-user"></i>
-          </Link>
-          <Link to="shoppingCart">
+          </NavLink>
+          <NavLink exact to="/shoppingCart">
             <i className="fas fa-pizza-slice"></i>
             <div className={s.cartAmount}>0</div>
-          </Link>
+          </NavLink>
           <i
             className="fas fa-door-open"
             onClick={() => {
@@ -49,7 +59,13 @@ const Header: React.FC = () => {
         </div>
       ) : (
         <div className={s.authBtn}>
-          <Link to="signUp">Sign up</Link> / <Link to="/signIn">Sign in</Link>
+          <NavLink exact to="/signUp">
+            Sign up
+          </NavLink>{' '}
+          /{' '}
+          <NavLink exact to="/signIn">
+            Sign in
+          </NavLink>
         </div>
       )}
       <i className="fas fa-search"></i>

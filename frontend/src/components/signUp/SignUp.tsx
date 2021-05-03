@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
 import { AuthFieldsType } from '../../types';
-import { authAPI } from '../../api/authAPI';
+import { serverAPI } from '../../api/serverAPI';
 
 const validate = (values: AuthFieldsType) => {
   const errors = {} as AuthFieldsType;
@@ -41,7 +41,7 @@ const SignUp: React.FC = () => {
     },
     validate,
     onSubmit: (values) => {
-      authAPI(
+      serverAPI(
         '/auth/signUp',
         values,
         (response) => {
@@ -77,7 +77,7 @@ const SignUp: React.FC = () => {
             </p>
             <button
               onClick={() => {
-                authAPI(
+                serverAPI<AuthFieldsType>(
                   '/auth/emailChecked',
                   {
                     ...data,
@@ -91,7 +91,7 @@ const SignUp: React.FC = () => {
                         email: response.data.email,
                         id: response.data.id,
                         logedIn: true,
-                        meta: JSON.stringify(response.data.meta),
+                        meta: JSON.parse(response.data.meta),
                       },
                     });
                     window.history.back();

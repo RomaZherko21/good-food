@@ -2,7 +2,8 @@ const Customer = require('../models/customer.model');
 const createError = require('http-errors');
 
 class CustomersController {
-  putCustomerMeta(req, res, next) {
+  putCustomerMetaData(req, res, next) {
+    console.log(req.body);
     Customer.update(
       { meta: req.body.meta },
       { where: { email: req.body.email } }
