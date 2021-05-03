@@ -54,6 +54,7 @@ const Header: React.FC = () => {
                 type: Types.SignIn,
                 payload: { ...initialState.user },
               });
+              document.cookie = `password=undefined`;
             }}
           ></i>
         </div>

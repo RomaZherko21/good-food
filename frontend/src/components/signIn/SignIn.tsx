@@ -49,7 +49,7 @@ const SignIn: React.FC = () => {
         values,
         (response) => {
           document.cookie = `password=${response.data.password}`;
-          console.log(response.data);
+          console.log(document.cookie);
           dispatch({
             type: Types.SignIn,
             payload: {

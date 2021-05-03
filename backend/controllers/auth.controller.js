@@ -57,6 +57,7 @@ class AuthController {
                 email: dataValues.email,
                 id: dataValues.id,
                 status: 200,
+                password: dataValues.password,
                 meta: '{}',
               });
             })
@@ -91,6 +92,7 @@ class AuthController {
             id: dataValues.id,
             status: 200,
             meta: dataValues.meta,
+            password: dataValues.password,
           });
         } else {
           return next(createError(401, `Wrong data!`));
@@ -105,7 +107,13 @@ class AuthController {
     if (cookie !== undefined) {
       Customer.findOne({ where: { password: cookie } })
         .then(async ({ dataValues }) => {
-          res.status(200).send({ ...dataValues });
+          res.status(200).json({
+            email: dataValues.email,
+            id: dataValues.id,
+            status: 200,
+            meta: dataValues.meta,
+            password: dataValues.password,
+          });
         })
         .catch(() => {
           return next(createError(401, `Wrong Cookies!`));

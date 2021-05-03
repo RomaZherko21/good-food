@@ -19,3 +19,14 @@ export const serverAPI = <ValueType>(
       err(message);
     });
 };
+export const cookiesAPI = (callback: (response: any) => void) => {
+  axios
+    .get(`${process.env.REACT_APP_SERVER_URL}/auth/cookie`, {
+      withCredentials: true,
+    })
+    .then(function (response) {
+      if (response.data.status === 200) {
+        callback(response);
+      }
+    });
+};
