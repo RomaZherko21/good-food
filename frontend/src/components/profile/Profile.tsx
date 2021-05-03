@@ -1,12 +1,14 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import s from './Profile.module.css';
 import { AppContext } from '../../state/context';
-import { Types } from '../../state/reducers';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
-  const { state, dispatch } = useContext(AppContext);
-  console.log(state.user);
+  const { state } = useContext(AppContext);
+  let userMetaData;
+  if (state.user.meta) {
+    userMetaData = Object.entries(state.user.meta);
+  }
   return (
     <section className={s.profile}>
       <div className={s.profileInfo}>
@@ -15,8 +17,23 @@ const Profile = () => {
         <Link to="/profile/customization">
           <i className="fas fa-cogs"></i>
         </Link>
-        <div>{JSON.stringify(state.user.meta)}</div>
       </div>
+      <ul className={s.metaData}>
+        <h1>About</h1>
+        {userMetaData &&
+          userMetaData.map((item: any) => {
+            return (
+              <li key={item[1]}>
+                {item[0]}:{' '}
+                {Array.isArray(item[1]) ? (
+                  item[1].map((e) => <span key={e}>{e}; </span>)
+                ) : (
+                  <span> {item[1]}</span>
+                )}
+              </li>
+            );
+          })}
+      </ul>
     </section>
   );
 };
