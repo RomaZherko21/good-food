@@ -72,6 +72,9 @@
   width: auto;
   margin: 8px;
   cursor: pointer;
+
+  width: 200px;
+  height: 220px;
 }
 .recipesList div h4 {
   color: #a3865b;
@@ -94,6 +97,7 @@
 }
 .recipesList div img {
   width: 200px;
+  height: 150px;
 }
 .recipesList div:hover > p {
   color: #62a5a1;

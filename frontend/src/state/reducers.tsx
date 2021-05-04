@@ -12,8 +12,7 @@ type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum Types {
-  Create = 'CREATE_PRODUCT',
-  Delete = 'DELETE_PRODUCT',
+  SaveProducts = 'SAVE_PRODUCTS',
   Add = 'ADD_PRODUCT',
   SignIn = 'SIGN_IN',
   MetaChange = 'META_CHANGE',
@@ -22,14 +21,7 @@ export enum Types {
 // Product
 
 type ProductPayload = {
-  [Types.Create]: {
-    id: number;
-    name: string;
-    price: number;
-  };
-  [Types.Delete]: {
-    id: number;
-  };
+  [Types.SaveProducts]: ProductType[];
 };
 
 export type ProductActionsType = ActionMap<ProductPayload>[keyof ActionMap<ProductPayload>];
@@ -39,17 +31,8 @@ export const productReducer = (
   action: ProductActionsType | ShoppingCartActionsType | UserActionsType
 ) => {
   switch (action.type) {
-    case Types.Create:
-      return [
-        ...state,
-        {
-          id: action.payload.id,
-          name: action.payload.name,
-          price: action.payload.price,
-        },
-      ];
-    case Types.Delete:
-      return [...state.filter((product) => product.id !== action.payload.id)];
+    case Types.SaveProducts:
+      return [...state, ...action.payload];
     default:
       return state;
   }

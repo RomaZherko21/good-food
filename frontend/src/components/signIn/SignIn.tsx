@@ -35,7 +35,6 @@ const validate = (values: AuthFieldsType) => {
 const SignIn: React.FC = () => {
   const [err, setErr] = useState<string>('');
   const { dispatch } = useContext(AppContext);
-
   const formik = useFormik({
     initialValues: {
       password: '',

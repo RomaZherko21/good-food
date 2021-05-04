@@ -15,22 +15,28 @@ const Product = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    amount: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false,
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    description: {
+    ingredients: {
       type: DataTypes.TEXT,
-      defaultValue: 'Nothing about it...',
+      allowNull: false,
+    },
+    steps: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    timers: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    imageURL: {
+      type: DataTypes.STRING,
+      defaultValue:
+        'https://thatssojenn.files.wordpress.com/2012/09/no-food.jpg',
+      allowNull: true,
+    },
+    originalURL: {
+      type: DataTypes.STRING,
+      defaultValue:
+        'https://thatssojenn.files.wordpress.com/2012/09/no-food.jpg',
       allowNull: true,
     },
   },

@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, Dispatch } from 'react';
-import { ProductType, UserType, MetaDataType } from '../types';
+import { ProductType, UserType } from '../types';
 import {
   productReducer,
   ProductActionsType,

@@ -19,6 +19,26 @@ export const serverAPI = <ValueType>(
       err(message);
     });
 };
+export const productAPI = (
+  URL: string,
+  callback: (response: any) => void,
+  err: (message: string) => void
+) => {
+  axios
+    .get(`${process.env.REACT_APP_SERVER_URL}${URL}`, {
+      withCredentials: true,
+    })
+    .then(function (response) {
+      if (response.data.status === 200) {
+        callback(response);
+      } else {
+        err(response.data.message);
+      }
+    })
+    .catch(function ({ message }) {
+      err(message);
+    });
+};
 export const cookiesAPI = (callback: (response: any) => void) => {
   axios
     .get(`${process.env.REACT_APP_SERVER_URL}/auth/cookie`, {

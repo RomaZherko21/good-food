@@ -1,15 +1,22 @@
 const Product = require('../models/product.model');
+const createError = require('http-errors');
 
 class ProductsController {
   getProducts(req, res) {
-    Product.create({
-      name: 'harry potter',
-      category: 'books',
-      amount: 100,
-      price: 285,
-      description: 'asdas dasdasd qweq 12 qweqwe',
-    }).catch((err) => console.log(err));
-    res.end('Created');
+    console.log(req.query);
+    Product.findAll({
+      offset: Number(req.query.offset),
+      limit: Number(req.query.limit),
+    })
+      .then((data) => {
+        res.status(200).json({
+          status: 200,
+          data,
+        });
+      })
+      .catch(() => {
+        return next(createError(500, `No data!`));
+      });
   }
   getCategory(req, res) {
     res.send('/products/:category');

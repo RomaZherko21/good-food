@@ -1,8 +1,3 @@
-export type ProductType = {
-  id: number;
-  name: string;
-  price: number;
-};
 export type UserType = {
   logedIn: boolean;
   id: string;
@@ -22,3 +17,20 @@ export type AuthFieldsType = {
   password: string;
   token?: string;
 };
+
+export type ProductType = {
+  id: number;
+  name: string;
+  ingredients: ProductIngredientsType;
+  steps: string;
+  timers: ProductTimersType;
+  imageURL: string;
+  originalURL?: string;
+};
+
+export type ProductTimersType = number[];
+export type ProductIngredientsType = {
+  quantity: string;
+  name: string;
+  type: string;
+}[];
