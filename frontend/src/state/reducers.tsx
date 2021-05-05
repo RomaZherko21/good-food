@@ -18,6 +18,11 @@ export enum Types {
   MetaChange = 'META_CHANGE',
 }
 
+export type AllActionsType =
+  | ProductActionsType
+  | ShoppingCartActionsType
+  | UserActionsType;
+
 // Product
 
 type ProductPayload = {
@@ -28,7 +33,7 @@ export type ProductActionsType = ActionMap<ProductPayload>[keyof ActionMap<Produ
 
 export const productReducer = (
   state: ProductType[],
-  action: ProductActionsType | ShoppingCartActionsType | UserActionsType
+  action: AllActionsType
 ) => {
   switch (action.type) {
     case Types.SaveProducts:
@@ -46,10 +51,7 @@ type ShoppingCartPayload = {
 
 export type ShoppingCartActionsType = ActionMap<ShoppingCartPayload>[keyof ActionMap<ShoppingCartPayload>];
 
-export const shoppingCartReducer = (
-  state: number,
-  action: ProductActionsType | ShoppingCartActionsType | UserActionsType
-) => {
+export const shoppingCartReducer = (state: number, action: AllActionsType) => {
   switch (action.type) {
     case Types.Add:
       return state + 1;
@@ -66,10 +68,7 @@ type UserPayload = {
 
 export type UserActionsType = ActionMap<UserPayload>[keyof ActionMap<UserPayload>];
 
-export const userReducer = (
-  state: UserType,
-  action: ProductActionsType | ShoppingCartActionsType | UserActionsType
-) => {
+export const userReducer = (state: UserType, action: AllActionsType) => {
   switch (action.type) {
     case Types.SignIn:
       return {

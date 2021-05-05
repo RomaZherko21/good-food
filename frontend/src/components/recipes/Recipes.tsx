@@ -1,28 +1,10 @@
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../../state/context';
 import s from './Recipes.module.css';
-import { productAPI } from '../../api/serverAPI';
-import { Types } from '../../state/reducers';
 
 function Recipes() {
-  const [err, setErr] = useState<string>('');
-  const { state, dispatch } = useContext(AppContext);
+  const { state } = useContext(AppContext);
 
-  useEffect(() => {
-    productAPI(
-      '/products/?limit=10&offset=0',
-      (response) => {
-        dispatch({
-          type: Types.SaveProducts,
-          payload: [...response.data.data],
-        });
-      },
-      (message) => {
-        setErr(message);
-      }
-    );
-  }, []);
   console.log(state.products);
   return (
     <section className={s.recipes}>
@@ -37,7 +19,6 @@ function Recipes() {
         <li>VEGETABLES</li>
         <li>ALL RECIPES</li>
       </ul>
-      <div>{err}</div>
       <div className={s.recipesList}>
         {state.products.map((item) => {
           return (
