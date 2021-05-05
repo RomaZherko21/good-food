@@ -1,0 +1,10 @@
+version: '3'
+services:
+  node-app:
+    build: .
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./:/backend
+    env_file:
+      - ./.env
