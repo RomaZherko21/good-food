@@ -6,3 +6,10 @@ body {
   margin: 0;
   padding: 0;
 }
+.inputErr {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+  font-family: serif;
+}

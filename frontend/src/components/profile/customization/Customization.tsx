@@ -1,6 +1,6 @@
 import s from './Customization.module.css';
 import { Formik, Form, Field } from 'formik';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { serverAPI } from '../../../api/serverAPI';
 import { AppContext } from '../../../state/context';
@@ -35,6 +35,21 @@ const validateBirthday = (value: string) => {
 const Customization = () => {
   const [err, setErr] = useState<string>('');
   const { state, dispatch } = useContext(AppContext);
+
+  const dietArr: string[] = ['GluetenFree', 'Vegeterian', 'Vegan', 'DairyFree'];
+  const countries: string[] = [
+    'Country',
+    'Belarus',
+    'Russia',
+    'UK',
+    'USA',
+    'Ukraine',
+    'Sweden',
+    'Australia',
+    'Litva',
+    'Latvia',
+    'Germany',
+  ];
 
   return (
     <section className={s.customization}>
@@ -87,12 +102,11 @@ const Customization = () => {
             ) : null}
 
             <Field as="select" name="country">
-              <option value="null">Country</option>
-              <option value="Belarus">Belarus</option>
-              <option value="Russia">Russia</option>
-              <option value="Ukraine">Ukraine</option>
-              <option value="UK">UK</option>
-              <option value="USA">USA</option>
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
             </Field>
             <label htmlFor="surname">Birthday (DD.MM.YYYY)</label>
             <Field validate={validateBirthday} name="birthday" />
@@ -102,90 +116,29 @@ const Customization = () => {
 
             <label>DO YOU HAVE ANY SPECIAL DIETARY REQUIREMENTS?</label>
             <div className={s.checkboxGroup}>
-              <label>
-                <Field
-                  type="checkbox"
-                  name="diet"
-                  value="GluetenFree"
-                  style={
-                    values.diet.find((item) => item === 'GluetenFree')
-                      ? { backgroundColor: '#61a5a0' }
-                      : { backgroundColor: 'inherit' }
-                  }
-                />
-                <p
-                  style={
-                    values.diet.find((item) => item === 'GluetenFree')
-                      ? { color: 'white' }
-                      : { color: 'inherit' }
-                  }
-                >
-                  Glueten Free{' '}
-                </p>
-              </label>
-              <label>
-                <Field
-                  type="checkbox"
-                  name="diet"
-                  value="Vegeterian"
-                  style={
-                    values.diet.find((item) => item === 'Vegeterian')
-                      ? { backgroundColor: '#61a5a0' }
-                      : { backgroundColor: 'inherit' }
-                  }
-                />
-                <p
-                  style={
-                    values.diet.find((item) => item === 'Vegeterian')
-                      ? { color: 'white' }
-                      : { color: 'inherit' }
-                  }
-                >
-                  Vegeterian
-                </p>
-              </label>
-              <label>
-                <Field
-                  type="checkbox"
-                  name="diet"
-                  value="Vegan"
-                  style={
-                    values.diet.find((item) => item === 'Vegan')
-                      ? { backgroundColor: '#61a5a0' }
-                      : { backgroundColor: 'inherit' }
-                  }
-                />
-                <p
-                  style={
-                    values.diet.find((item) => item === 'Vegan')
-                      ? { color: 'white' }
-                      : { color: 'inherit' }
-                  }
-                >
-                  Vegan
-                </p>
-              </label>
-              <label>
-                <Field
-                  type="checkbox"
-                  name="diet"
-                  value="DairyFree"
-                  style={
-                    values.diet.find((item) => item === 'DairyFree')
-                      ? { backgroundColor: '#61a5a0' }
-                      : { backgroundColor: 'inherit' }
-                  }
-                />
-                <p
-                  style={
-                    values.diet.find((item) => item === 'DairyFree')
-                      ? { color: 'white' }
-                      : { color: 'inherit' }
-                  }
-                >
-                  Dairy Free
-                </p>
-              </label>
+              {dietArr.map((diet) => (
+                <label key={diet}>
+                  <Field
+                    type="checkbox"
+                    name="diet"
+                    value={diet}
+                    style={
+                      values.diet.find((item) => item === diet)
+                        ? { backgroundColor: '#61a5a0' }
+                        : { backgroundColor: 'inherit' }
+                    }
+                  />
+                  <p
+                    style={
+                      values.diet.find((item) => item === diet)
+                        ? { color: 'white' }
+                        : { color: 'inherit' }
+                    }
+                  >
+                    {diet}
+                  </p>
+                </label>
+              ))}
             </div>
             <button type="submit">Save and Update</button>
             <span className={s.err}>{err}</span>

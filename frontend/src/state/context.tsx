@@ -2,11 +2,9 @@ import React, { createContext, useReducer, Dispatch } from 'react';
 import { ProductType, UserType } from '../types';
 import {
   productReducer,
-  ProductActionsType,
   shoppingCartReducer,
-  ShoppingCartActionsType,
   userReducer,
-  UserActionsType,
+  AllActionsType,
 } from './reducers';
 
 type InitialStateType = {
@@ -28,9 +26,7 @@ export const initialState = {
 
 const AppContext = createContext<{
   state: InitialStateType;
-  dispatch: Dispatch<
-    ProductActionsType | ShoppingCartActionsType | UserActionsType
-  >;
+  dispatch: Dispatch<AllActionsType>;
 }>({
   state: initialState,
   dispatch: () => null,
@@ -38,7 +34,7 @@ const AppContext = createContext<{
 
 const mainReducer = (
   { products, shoppingCart, user }: InitialStateType,
-  action: ProductActionsType | ShoppingCartActionsType | UserActionsType
+  action: AllActionsType
 ) => ({
   products: productReducer(products, action),
   shoppingCart: shoppingCartReducer(shoppingCart, action),

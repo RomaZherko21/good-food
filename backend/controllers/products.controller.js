@@ -3,7 +3,6 @@ const createError = require('http-errors');
 
 class ProductsController {
   getProducts(req, res) {
-    console.log(req.query);
     Product.findAll({
       offset: Number(req.query.offset),
       limit: Number(req.query.limit),

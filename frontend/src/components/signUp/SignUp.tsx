@@ -6,6 +6,7 @@ import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
 import { AuthFieldsType } from '../../types';
 import { serverAPI } from '../../api/serverAPI';
+import AuthInput from '../common/AuthInput';
 
 const validate = (values: AuthFieldsType) => {
   const errors = {} as AuthFieldsType;
@@ -113,36 +114,18 @@ const SignUp: React.FC = () => {
         </div>
       ) : (
         <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="email">Email Address</label>
-          <input
-            id="email"
+          <AuthInput
+            text="Email Address"
             name="email"
             type="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            onBlur={formik.handleBlur}
+            formik={formik}
           />
-          <span className={s.err}>
-            {formik.touched.email && formik.errors.email ? (
-              <div>{formik.errors.email}</div>
-            ) : null}
-          </span>
-
-          <label htmlFor="password">password</label>
-          <input
-            id="password"
+          <AuthInput
+            text="Password"
             name="password"
             type="password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            onBlur={formik.handleBlur}
+            formik={formik}
           />
-          <span className={s.err}>
-            {formik.touched.password && formik.errors.password ? (
-              <div>{formik.errors.password}</div>
-            ) : null}
-          </span>
-
           <button type="submit">Submit</button>
           <span className={s.err}>{err}</span>
         </form>

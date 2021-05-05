@@ -3,7 +3,6 @@ const createError = require('http-errors');
 
 class CustomersController {
   postCustomerMetaData(req, res, next) {
-    console.log(req.body);
     Customer.update(
       { meta: req.body.meta },
       { where: { email: req.body.email } }

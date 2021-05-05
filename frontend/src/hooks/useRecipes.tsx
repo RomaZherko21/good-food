@@ -18,7 +18,7 @@ const useRecipes = () => {
         console.log(message);
       }
     );
-  }, []);
+  }, [dispatch]);
 };
 
 export default useRecipes;
