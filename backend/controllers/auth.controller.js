@@ -84,8 +84,17 @@ class AuthController {
           secret: dataValues.base32,
           encoding: 'base32',
           token: req.body.token,
+          window: 2,
         });
-        console.log('SignIN:', validPassword, verified, dataValues.active);
+        console.log(
+          'SignIN:',
+          'password: ',
+          validPassword,
+          'Token: ',
+          verified,
+          'active: ',
+          dataValues.active
+        );
         if (validPassword && dataValues.active && verified) {
           res.status(200).json({
             email: dataValues.email,

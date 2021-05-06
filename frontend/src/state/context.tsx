@@ -20,7 +20,7 @@ export const initialState = {
     email: '',
     id: '',
     logedIn: false,
-    meta: '',
+    meta: '{}',
   },
 };
 
