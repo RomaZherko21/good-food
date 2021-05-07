@@ -1,6 +1,6 @@
 const Product = require('../models/product.model');
 const createError = require('http-errors');
-
+let recipes = require('../data/recipes');
 class ProductsController {
   getProducts(req, res) {
     Product.findAll({
@@ -18,7 +18,7 @@ class ProductsController {
       });
   }
   getCategory(req, res) {
-    res.send('/products/:category');
+    res.send('get');
   }
   getProduct(req, res) {
     res.send('/products/:category/:id');

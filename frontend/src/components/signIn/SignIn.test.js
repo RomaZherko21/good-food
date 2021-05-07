@@ -1,14 +1,20 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import SignIn from './SignIn';
 
-describe('Navbar', () => {
+describe('Sign in', () => {
   it('Render h1', () => {
     render(<SignIn />);
     expect(screen.getByText('Sign In')).toBeInTheDocument();
   });
   it('email input', () => {
     render(<SignIn />);
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+    let elem = screen.getByLabelText(/email/i);
+    expect(elem).toBeInTheDocument();
+    expect(elem).toHaveValue('');
+    userEvent.type(elem, 'Something');
+    expect(elem).toHaveValue('Something');
   });
   it('password input', () => {
     render(<SignIn />);

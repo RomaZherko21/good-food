@@ -76,7 +76,6 @@
   width: 200px;
   height: 220px;
 }
-
 .recipesList div h4 {
   color: #a3865b;
   display: block;
@@ -89,11 +88,18 @@
   overflow: hidden;
   text-transform: uppercase;
 }
+.recipesList div p {
+  font-family: Average, serif;
+  font-weight: lighter;
+  font-size: 19px;
+  line-height: 25px;
+  margin-bottom: 15px;
+}
 .recipesList div img {
   width: 200px;
   height: 150px;
 }
-.recipesList div:hover > h4 {
+.recipesList div:hover > p {
   color: #62a5a1;
   transition: 0.3s ease;
 }

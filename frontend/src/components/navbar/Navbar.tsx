@@ -43,7 +43,7 @@ const Header: React.FC = () => {
           <NavLink exact to="/profile">
             <i className="fas fa-user"></i>
           </NavLink>
-          <NavLink exact to="/shoppingCart">
+          <NavLink exact to="/my-recipies">
             <i className="fas fa-pizza-slice"></i>
             <div className={s.cartAmount}>0</div>
           </NavLink>

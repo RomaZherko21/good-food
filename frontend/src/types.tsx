@@ -21,9 +21,9 @@ export type AuthFieldsType = {
 export type ProductType = {
   id: number;
   name: string;
-  ingredients: ProductIngredientsType;
+  ingredients: ProductIngredientsType | string;
   steps: string;
-  timers: ProductTimersType;
+  timers: ProductTimersType | string;
   imageURL: string;
   originalURL?: string;
 };
