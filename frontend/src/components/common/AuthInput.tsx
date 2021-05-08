@@ -1,4 +1,14 @@
-const AuthInput = ({ text, type, name, formik }: any) => {
+const AuthInput = ({
+  text,
+  type,
+  name,
+  formik,
+}: {
+  text: string;
+  type: string;
+  name: string;
+  formik: any;
+}) => {
   return (
     <>
       <label htmlFor={name}>{text}</label>

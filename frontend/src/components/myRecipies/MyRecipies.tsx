@@ -1,32 +1,32 @@
+import s from './MyRecipies.module.css';
 import { useContext } from 'react';
 import { useHistory } from 'react-router';
+
 import { AppContext } from '../../state/context';
-import s from './MyRecipies.module.css';
+import { ProductType } from '../../types';
 
 function MyRecipies() {
   const { state } = useContext(AppContext);
   let history = useHistory();
 
-  console.log(state.products);
   return (
     <section className={s.recipes}>
       <h1>My recipes...</h1>
       <div className={s.recipesList}>
-        {state.shoppingCart.products.map((item: any) => {
+        {state.shoppingCart.products.map((item: ProductType) => {
           return (
             <div
               key={item.id}
               id={String(item.id)}
-              onClick={(e: any) => {
-                history.push(`/recipies:${e.target.parentNode.id}`);
+              onClick={(event: any) => {
+                history.push(`/recipies:${event.target.parentNode.id}`);
               }}
             >
               <img
                 src={item.imageURL}
-                onError={(e: any) => {
-                  e.target.onerror = null;
-                  e.target.src =
-                    'https://thatssojenn.files.wordpress.com/2012/09/no-food.jpg';
+                onError={(event: any) => {
+                  event.target.onerror = null;
+                  event.target.src = item.originalURL;
                 }}
                 alt={item.name}
               />

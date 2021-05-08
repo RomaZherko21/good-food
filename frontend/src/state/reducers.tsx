@@ -56,27 +56,26 @@ type ShoppingCartPayload = {
 
 export type ShoppingCartActionsType = ActionMap<ShoppingCartPayload>[keyof ActionMap<ShoppingCartPayload>];
 
-export const shoppingCartReducer = (state: any, action: AllActionsType) => {
+export const shoppingCartReducer = (
+  state: { products: ProductType[] },
+  action: AllActionsType
+) => {
   switch (action.type) {
     case Types.AddToShoppingCart:
-      let found: boolean = false;
-      for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i].id === action.payload.id) {
-          found = true;
-          break;
-        }
-      }
       return {
         ...state,
-        products: found
-          ? [...state.products]
-          : [...state.products, action.payload],
+        products:
+          state.products.filter(
+            (item: ProductType) => item.id === action.payload.id
+          ).length > 0
+            ? [...state.products]
+            : [...state.products, action.payload],
       };
     case Types.RemoveFromShoppingCart:
       return {
         ...state,
-        products: [...state.products].filter(
-          (item) => item.id !== action.payload.id
+        products: state.products.filter(
+          (item: ProductType) => item.id !== action.payload.id
         ),
       };
     default:
@@ -116,8 +115,8 @@ export const userReducer = (state: UserType, action: AllActionsType) => {
 //Common
 
 type CommonPayload = {
-  [Types.ProductsLimit]: any;
-  [Types.ProductsOffset]: any;
+  [Types.ProductsLimit]: undefined;
+  [Types.ProductsOffset]: undefined;
 };
 
 export type CommonActionsType = ActionMap<CommonPayload>[keyof ActionMap<CommonPayload>];

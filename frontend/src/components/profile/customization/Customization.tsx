@@ -6,7 +6,6 @@ import { serverAPI } from '../../../api/serverAPI';
 import { AppContext } from '../../../state/context';
 import { MetaDataType } from '../../../types';
 import { Types } from '../../../state/reducers';
-
 import { UserType } from '../../../types';
 
 const validateName = (value: string) => {
@@ -116,14 +115,14 @@ const Customization = () => {
 
             <label>DO YOU HAVE ANY SPECIAL DIETARY REQUIREMENTS?</label>
             <div className={s.checkboxGroup}>
-              {dietArr.map((diet) => (
+              {dietArr.map((diet: string) => (
                 <label key={diet}>
                   <Field
                     type="checkbox"
                     name="diet"
                     value={diet}
                     style={
-                      values.diet.find((item) => item === diet)
+                      values.diet.find((item: string) => item === diet)
                         ? { backgroundColor: '#61a5a0' }
                         : { backgroundColor: 'inherit' }
                     }

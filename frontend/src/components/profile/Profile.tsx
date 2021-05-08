@@ -1,7 +1,8 @@
-import { useContext } from 'react';
 import s from './Profile.module.css';
-import { AppContext } from '../../state/context';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { AppContext } from '../../state/context';
 
 const Profile = () => {
   const { state } = useContext(AppContext);
@@ -21,12 +22,14 @@ const Profile = () => {
       <ul className={s.metaData}>
         <h1>About</h1>
         {userMetaData &&
-          userMetaData.map((item: any) => {
+          userMetaData.map((item: [string, string | string[] | undefined]) => {
             return (
-              <li key={item[1]}>
-                {item[0]}:{' '}
+              <li key={item[0]}>
+                {item[0]}:
                 {Array.isArray(item[1]) ? (
-                  item[1].map((e) => <span key={e}>{e}; </span>)
+                  item[1].map((elem: string) => (
+                    <span key={elem}>{elem}; </span>
+                  ))
                 ) : (
                   <span> {item[1]}</span>
                 )}

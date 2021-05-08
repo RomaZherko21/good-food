@@ -8,6 +8,8 @@ import { Types } from '../../state/reducers';
 const Header: React.FC = () => {
   const { state, dispatch } = useContext(AppContext);
 
+  const navLinks: string[] = ['recipes', 'discover', 'nutrition', 'video'];
+
   return (
     <nav className={s.nav}>
       <h1>
@@ -16,26 +18,13 @@ const Header: React.FC = () => {
         </NavLink>
       </h1>
       <ul>
-        <li>
-          <NavLink exact to="#">
-            RECIPES
-          </NavLink>
-        </li>
-        <li>
-          <NavLink exact to="#">
-            DISCOVER
-          </NavLink>
-        </li>
-        <li>
-          <NavLink exact to="#">
-            NUTRITION
-          </NavLink>
-        </li>
-        <li>
-          <NavLink exact to="#">
-            VIDEO
-          </NavLink>
-        </li>
+        {navLinks.map((link: string) => (
+          <li key={link}>
+            <NavLink exact to="#">
+              {link}
+            </NavLink>
+          </li>
+        ))}
       </ul>
 
       {state.user.logedIn ? (
@@ -64,8 +53,8 @@ const Header: React.FC = () => {
         <div className={s.authBtn}>
           <NavLink exact to="/signUp">
             Sign up
-          </NavLink>{' '}
-          /{' '}
+          </NavLink>
+          /
           <NavLink exact to="/signIn">
             Sign in
           </NavLink>

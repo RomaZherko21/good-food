@@ -10,7 +10,7 @@ import {
 
 type InitialStateType = {
   products: ProductType[];
-  shoppingCart: any;
+  shoppingCart: { products: ProductType[] };
   user: UserType;
   common: CommonType;
 };

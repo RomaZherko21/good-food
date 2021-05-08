@@ -1,14 +1,15 @@
-import React, { useContext, useRef } from 'react';
+import s from './Recipes.module.css';
+import { useContext } from 'react';
 import { useHistory } from 'react-router';
+
 import { productAPI } from '../../api/serverAPI';
 import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
-import s from './Recipes.module.css';
 
 function Recipes() {
   const { state, dispatch } = useContext(AppContext);
   let history = useHistory();
-  console.log(state.shoppingCart);
+
   return (
     <section className={s.recipes}>
       <h1>Recipes</h1>
