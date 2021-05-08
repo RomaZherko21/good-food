@@ -1,4 +1,4 @@
-import { ProductType, UserType } from '../types';
+import { ProductType, UserType, CommonType } from '../types';
 
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
@@ -13,15 +13,19 @@ type ActionMap<M extends { [index: string]: any }> = {
 
 export enum Types {
   SaveProducts = 'SAVE_PRODUCTS',
-  Add = 'ADD_PRODUCT',
+  AddToShoppingCart = 'ADD_TO_SHOPPING_CART',
+  RemoveFromShoppingCart = 'REMOVE_FROM_SHOPPING_CART',
   SignIn = 'SIGN_IN',
   MetaChange = 'META_CHANGE',
+  ProductsLimit = 'PRODUCTS_LIMIT',
+  ProductsOffset = 'PRODUCTS_OFFSET',
 }
 
 export type AllActionsType =
   | ProductActionsType
   | ShoppingCartActionsType
-  | UserActionsType;
+  | UserActionsType
+  | CommonActionsType;
 
 // Product
 
@@ -46,19 +50,40 @@ export const productReducer = (
 // ShoppingCart
 
 type ShoppingCartPayload = {
-  [Types.Add]: undefined;
+  [Types.AddToShoppingCart]: ProductType;
+  [Types.RemoveFromShoppingCart]: ProductType;
 };
 
 export type ShoppingCartActionsType = ActionMap<ShoppingCartPayload>[keyof ActionMap<ShoppingCartPayload>];
 
-export const shoppingCartReducer = (state: number, action: AllActionsType) => {
+export const shoppingCartReducer = (state: any, action: AllActionsType) => {
   switch (action.type) {
-    case Types.Add:
-      return state + 1;
+    case Types.AddToShoppingCart:
+      let found: boolean = false;
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i].id === action.payload.id) {
+          found = true;
+          break;
+        }
+      }
+      return {
+        ...state,
+        products: found
+          ? [...state.products]
+          : [...state.products, action.payload],
+      };
+    case Types.RemoveFromShoppingCart:
+      return {
+        ...state,
+        products: [...state.products].filter(
+          (item) => item.id !== action.payload.id
+        ),
+      };
     default:
       return state;
   }
 };
+
 // User
 
 type UserPayload = {
@@ -82,6 +107,34 @@ export const userReducer = (state: UserType, action: AllActionsType) => {
       return {
         ...state,
         meta: action.payload.meta,
+      };
+    default:
+      return state;
+  }
+};
+
+//Common
+
+type CommonPayload = {
+  [Types.ProductsLimit]: any;
+  [Types.ProductsOffset]: any;
+};
+
+export type CommonActionsType = ActionMap<CommonPayload>[keyof ActionMap<CommonPayload>];
+
+export const commonReducer = (state: CommonType, action: AllActionsType) => {
+  switch (action.type) {
+    case Types.ProductsLimit:
+      return {
+        ...state,
+      };
+    case Types.ProductsOffset:
+      return {
+        ...state,
+        products: {
+          ...state.products,
+          offset: state.products.offset + state.products.limit,
+        },
       };
     default:
       return state;

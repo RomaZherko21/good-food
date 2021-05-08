@@ -3,11 +3,11 @@ import { productAPI } from '../api/serverAPI';
 import { AppContext } from '../state/context';
 import { Types } from '../state/reducers';
 
-const useRecipes = (limit: number = 6, offset: number = 0) => {
-  const { dispatch } = useContext(AppContext);
+const useRecipes = () => {
+  const { state, dispatch } = useContext(AppContext);
   useEffect(() => {
     productAPI(
-      `/products/?limit=${limit}&offset=${offset}`,
+      `/products/?limit=${state.common.products.limit}&offset=${state.common.products.offset}`,
       (response) => {
         dispatch({
           type: Types.SaveProducts,
@@ -18,7 +18,7 @@ const useRecipes = (limit: number = 6, offset: number = 0) => {
         console.log(message);
       }
     );
-  }, [dispatch]);
+  }, []);
 };
 
 export default useRecipes;

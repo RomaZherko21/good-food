@@ -6,7 +6,7 @@ import useRecipes from './hooks/useRecipes';
 
 function App() {
   useCookies();
-  useRecipes(3, 0);
+  useRecipes();
   return <Routes />;
 }
 

@@ -34,3 +34,10 @@ export type ProductIngredientsType = {
   name: string;
   type: string;
 }[];
+
+export type CommonType = {
+  products: {
+    limit: number;
+    offset: number;
+  };
+};

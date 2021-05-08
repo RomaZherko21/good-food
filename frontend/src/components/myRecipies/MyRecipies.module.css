@@ -3,6 +3,7 @@
   color: black;
   text-align: center;
   padding: 30px 0px;
+  min-height: 100vh;
 }
 
 .recipes h1 {

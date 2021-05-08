@@ -7,10 +7,8 @@ import s from './Recipes.module.css';
 
 function Recipes() {
   const { state, dispatch } = useContext(AppContext);
-  let offset = useRef(0);
   let history = useHistory();
-
-  console.log(state.products);
+  console.log(state.shoppingCart);
   return (
     <section className={s.recipes}>
       <h1>Recipes</h1>
@@ -38,8 +36,7 @@ function Recipes() {
                 src={item.imageURL}
                 onError={(e: any) => {
                   e.target.onerror = null;
-                  e.target.src =
-                    'https://thatssojenn.files.wordpress.com/2012/09/no-food.jpg';
+                  e.target.src = item.originalURL;
                 }}
                 alt={item.name}
               />
@@ -50,9 +47,13 @@ function Recipes() {
       </div>
       <button
         onClick={() => {
-          offset.current += 3;
+          dispatch({
+            type: Types.ProductsOffset,
+          });
           productAPI(
-            `/products/?limit=3&offset=${offset.current}`,
+            `/products/?limit=${state.common.products.limit}&offset=${
+              state.common.products.offset + state.common.products.limit
+            }`,
             (response) => {
               dispatch({
                 type: Types.SaveProducts,

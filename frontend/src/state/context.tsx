@@ -1,26 +1,34 @@
 import React, { createContext, useReducer, Dispatch } from 'react';
-import { ProductType, UserType } from '../types';
+import { CommonType, ProductType, UserType } from '../types';
 import {
   productReducer,
   shoppingCartReducer,
   userReducer,
+  commonReducer,
   AllActionsType,
 } from './reducers';
 
 type InitialStateType = {
   products: ProductType[];
-  shoppingCart: number;
+  shoppingCart: any;
   user: UserType;
+  common: CommonType;
 };
 
 export const initialState = {
   products: [],
-  shoppingCart: 0,
+  shoppingCart: { products: [] },
   user: {
     email: '',
     id: '',
     logedIn: false,
     meta: '{}',
+  },
+  common: {
+    products: {
+      limit: 3,
+      offset: 0,
+    },
   },
 };
 
@@ -33,12 +41,13 @@ const AppContext = createContext<{
 });
 
 const mainReducer = (
-  { products, shoppingCart, user }: InitialStateType,
+  { products, shoppingCart, user, common }: InitialStateType,
   action: AllActionsType
 ) => ({
   products: productReducer(products, action),
   shoppingCart: shoppingCartReducer(shoppingCart, action),
   user: userReducer(user, action),
+  common: commonReducer(common, action),
 });
 
 const AppProvider: React.FC = ({ children }) => {

@@ -1,18 +1,26 @@
 import { useContext } from 'react';
+import { useHistory } from 'react-router';
 import { AppContext } from '../../state/context';
 import s from './MyRecipies.module.css';
 
 function MyRecipies() {
   const { state } = useContext(AppContext);
+  let history = useHistory();
 
   console.log(state.products);
   return (
     <section className={s.recipes}>
       <h1>My recipes...</h1>
       <div className={s.recipesList}>
-        {state.products.map((item) => {
+        {state.shoppingCart.products.map((item: any) => {
           return (
-            <div key={item.id}>
+            <div
+              key={item.id}
+              id={String(item.id)}
+              onClick={(e: any) => {
+                history.push(`/recipies:${e.target.parentNode.id}`);
+              }}
+            >
               <img
                 src={item.imageURL}
                 onError={(e: any) => {
@@ -27,7 +35,6 @@ function MyRecipies() {
           );
         })}
       </div>
-      <button>view more</button>
     </section>
   );
 }

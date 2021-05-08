@@ -38,3 +38,24 @@
   font-size: 18px;
   margin-bottom: 16px;
 }
+
+.recipe button {
+  font-family: Montserrat, Georgia, serif;
+  font-weight: 700;
+  font-size: 15px;
+  display: block;
+  margin: auto;
+  padding: 5px 20px;
+  text-transform: uppercase;
+  border: 2px solid #61a5a0;
+  border-color: #61a5a0;
+  text-align: center;
+  color: #2e353c;
+  line-height: 44px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  margin-top: 30px;
+}
+.recipe button:hover {
+  background-color: #61a5a0;
+}

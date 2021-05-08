@@ -45,7 +45,9 @@ const Header: React.FC = () => {
           </NavLink>
           <NavLink exact to="/my-recipies">
             <i className="fas fa-pizza-slice"></i>
-            <div className={s.cartAmount}>0</div>
+            <div className={s.cartAmount}>
+              {state.shoppingCart.products.length}
+            </div>
           </NavLink>
           <i
             className="fas fa-door-open"
