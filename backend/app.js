@@ -44,3 +44,5 @@ app.use((error, req, res, next) => {
     stack: error.stack,
   });
 });
+
+module.exports.app = app;

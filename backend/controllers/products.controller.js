@@ -18,7 +18,7 @@ class ProductsController {
       });
   }
   getCategory(req, res) {
-    res.send('get');
+    res.status(200).send('Hello Test');
   }
   getProduct(req, res) {
     res.send('/products/:category/:id');
