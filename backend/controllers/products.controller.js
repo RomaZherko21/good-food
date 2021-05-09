@@ -1,8 +1,8 @@
 const Product = require('../models/product.model');
 const createError = require('http-errors');
-let recipes = require('../data/recipes');
+
 class ProductsController {
-  getProducts(req, res) {
+  getProducts(req, res, next) {
     Product.findAll({
       offset: Number(req.query.offset),
       limit: Number(req.query.limit),

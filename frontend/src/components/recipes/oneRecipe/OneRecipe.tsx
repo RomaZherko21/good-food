@@ -85,16 +85,6 @@ function Recipes() {
               Add to Shopping cart
             </button>
           )}
-          {/* <button
-            onClick={() => {
-              dispatch({
-                type: Types.AddToShoppingCart,
-                payload: recipe,
-              });
-            }}
-          >
-            Add to Shopping cart
-          </button> */}
         </>
       )}
     </section>

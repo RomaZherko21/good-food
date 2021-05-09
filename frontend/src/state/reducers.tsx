@@ -15,6 +15,7 @@ export enum Types {
   SaveProducts = 'SAVE_PRODUCTS',
   AddToShoppingCart = 'ADD_TO_SHOPPING_CART',
   RemoveFromShoppingCart = 'REMOVE_FROM_SHOPPING_CART',
+  AddStorageRecipies = 'ADD_STORAGE-RECIPIES',
   SignIn = 'SIGN_IN',
   MetaChange = 'META_CHANGE',
   ProductsLimit = 'PRODUCTS_LIMIT',
@@ -52,6 +53,7 @@ export const productReducer = (
 type ShoppingCartPayload = {
   [Types.AddToShoppingCart]: ProductType;
   [Types.RemoveFromShoppingCart]: ProductType;
+  [Types.AddStorageRecipies]: ProductType[];
 };
 
 export type ShoppingCartActionsType = ActionMap<ShoppingCartPayload>[keyof ActionMap<ShoppingCartPayload>];
@@ -62,6 +64,10 @@ export const shoppingCartReducer = (
 ) => {
   switch (action.type) {
     case Types.AddToShoppingCart:
+      localStorage.setItem(
+        'recipies',
+        JSON.stringify([...state.products, { ...action.payload }])
+      );
       return {
         ...state,
         products:
@@ -72,11 +78,18 @@ export const shoppingCartReducer = (
             : [...state.products, action.payload],
       };
     case Types.RemoveFromShoppingCart:
+      let filteredProducts = state.products.filter(
+        (item: ProductType) => item.id !== action.payload.id
+      );
+      localStorage.setItem('recipies', JSON.stringify(filteredProducts));
       return {
         ...state,
-        products: state.products.filter(
-          (item: ProductType) => item.id !== action.payload.id
-        ),
+        products: [...filteredProducts],
+      };
+    case Types.AddStorageRecipies:
+      return {
+        ...state,
+        products: [...action.payload],
       };
     default:
       return state;
