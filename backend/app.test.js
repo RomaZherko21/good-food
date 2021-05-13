@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-var app = require('./app').app;
+const app = require('./app').app;
 
 describe('GET /products', function () {
   it('responds with json', function (done) {

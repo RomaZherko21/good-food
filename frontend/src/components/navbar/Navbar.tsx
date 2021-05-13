@@ -8,7 +8,7 @@ import { Types } from '../../state/reducers';
 const Header: React.FC = () => {
   const { state, dispatch } = useContext(AppContext);
 
-  const navLinks: string[] = ['recipes', 'discover', 'nutrition', 'video'];
+  const navLinks: string[] = ['discover', 'nutrition', 'chat'];
 
   return (
     <nav className={s.nav}>
@@ -20,7 +20,7 @@ const Header: React.FC = () => {
       <ul>
         {navLinks.map((link: string) => (
           <li key={link}>
-            <NavLink exact to="#">
+            <NavLink exact to={`/${link}`}>
               {link}
             </NavLink>
           </li>

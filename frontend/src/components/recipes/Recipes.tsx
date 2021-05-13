@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { productAPI } from '../../api/serverAPI';
 import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
+import { ProductType } from '../../types';
 
 function Recipes() {
   const { state, dispatch } = useContext(AppContext);
@@ -12,7 +13,9 @@ function Recipes() {
 
   return (
     <section className={s.recipes}>
-      <h1>Recipes</h1>
+      <h1>
+        Recipes <span className={s.recipeCount}>({state.products.length})</span>{' '}
+      </h1>
       <h3>GET COOKING & SHARING</h3>
       <ul className={s.filters}>
         <span>FILTER BY:</span>
@@ -24,9 +27,10 @@ function Recipes() {
         <li>ALL RECIPES</li>
       </ul>
       <div className={s.recipesList}>
-        {state.products.map((item) => {
+        {state.products.map((item: ProductType) => {
           return (
             <div
+              className={s.recipe}
               key={item.id}
               id={String(item.id)}
               onClick={(e: any) => {
@@ -41,6 +45,14 @@ function Recipes() {
                 }}
                 alt={item.name}
               />
+              <div className={s.recipeTimer}>
+                <i className="far fa-clock"></i>
+                {typeof item.timers === 'string' &&
+                  JSON.parse(item.timers).reduce(
+                    (pre: number, val: number) => pre + val
+                  )}{' '}
+                min.
+              </div>
               <h4>{item.name}</h4>
             </div>
           );

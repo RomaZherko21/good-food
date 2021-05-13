@@ -3,6 +3,7 @@
   color: black;
   text-align: center;
   padding: 30px 0px;
+  min-height: 100vh;
 }
 
 .recipes h1 {
@@ -68,13 +69,10 @@
   flex-wrap: wrap;
   text-align: left;
 }
-.recipesList div {
+.recipesList .recipe {
   width: auto;
   margin: 8px;
   cursor: pointer;
-
-  width: 200px;
-  height: 220px;
 }
 
 .recipesList div h4 {
@@ -91,7 +89,8 @@
 }
 .recipesList div img {
   width: 200px;
-  height: 150px;
+  height: 300px;
+  object-fit: cover;
 }
 .recipesList div:hover > h4 {
   color: #62a5a1;
@@ -118,4 +117,22 @@
 
 .recipes button:hover {
   background-color: #61a5a0;
+}
+.recipeCount {
+  color: #c3c3c3;
+  font-size: 15px;
+  font-family: Georgia;
+  letter-spacing: 1px;
+}
+.recipeTimer {
+  margin-top: 10px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: #a3865b;
+  font-size: 14px;
+}
+.recipeTimer i {
+  margin-right: 10px;
+  color: #000;
 }

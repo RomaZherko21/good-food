@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import Navbar from './components/navbar/Navbar';
 import Profile from './components/profile/Profile';
 import Recipes from './components/recipes/Recipes';
@@ -7,6 +8,8 @@ import SignUp from './components/signUp/SignUp';
 import Customization from './components/profile/customization/Customization';
 import MyRecipies from './components/myRecipies/MyRecipies';
 import OneRecipe from './components/recipes/oneRecipe/OneRecipe';
+import { Home } from './components/chat/Home';
+import { ChatRoom } from './components/chat/ChatRoom';
 
 function Routes() {
   return (
@@ -37,6 +40,14 @@ function Routes() {
         <Route exact path="/recipies:id">
           <Navbar />
           <OneRecipe />
+        </Route>
+        <Route exact path="/chat">
+          <Navbar />
+          <Home />
+        </Route>
+        <Route exact path="/:roomId">
+          <Navbar />
+          <ChatRoom />
         </Route>
       </Switch>
     </Router>
