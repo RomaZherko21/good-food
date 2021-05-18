@@ -9,8 +9,7 @@ export const useLocalStorage = (key, initialValue) => {
   useEffect(() => {
     const item = JSON.stringify(value);
     window.localStorage.setItem(key, item);
-    // отключаем линтер, чтобы не получать предупреждений об отсутствии зависимости key, от которой useEffect, на самом деле, не зависит
-    // здесь мы немного обманываем useEffect
+
     // eslint-disable-next-line
   }, [value]);
 

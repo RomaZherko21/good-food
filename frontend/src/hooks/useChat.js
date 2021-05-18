@@ -1,29 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
-// получаем класс IO
+import { useContext, useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import { nanoid } from 'nanoid';
-// наши хуки
+
 import { useLocalStorage } from './useLocalstorage';
 import { useBeforeUnload } from './useBeforeUnload';
+import { AppContext } from '../state/context';
 
-// адрес сервера
-// требуется перенаправление запросов - смотрите ниже
-const SERVER_URL = 'http://localhost:5000';
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-// хук принимает название комнаты
 export const useChat = (roomId) => {
-  // локальное состояние для пользователей
+  const { state } = useContext(AppContext);
   const [users, setUsers] = useState([]);
-  // локальное состояние для сообщений
   const [messages, setMessages] = useState([]);
 
   // создаем и записываем в локальное хранинище идентификатор пользователя
   const [userId] = useLocalStorage('userId', nanoid(8));
   // получаем из локального хранилища имя пользователя
-  const [username] = useLocalStorage('username');
+  let username = state.user.email;
+  // const [username] = useLocalStorage('username');
 
-  // useRef() используется не только для получения доступа к DOM-элементам,
-  // но и для хранения любых мутирующих значений в течение всего жизненного цикла компонента
   const socketRef = useRef(null);
 
   useEffect(() => {

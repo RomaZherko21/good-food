@@ -11,44 +11,34 @@ import OneRecipe from './components/recipes/oneRecipe/OneRecipe';
 import { Home } from './components/chat/Home';
 import { ChatRoom } from './components/chat/ChatRoom';
 
+const routes = [
+  { path: '/', name: 'Recipes', Component: Recipes },
+  { path: '/signIn', name: 'SignIn', Component: SignIn },
+  { path: '/signUp', name: 'SignUp', Component: SignUp },
+  { path: '/profile', name: 'Profile', Component: Profile },
+  { path: '/my-recipies', name: 'MyRecipies', Component: MyRecipies },
+  {
+    path: '/profile/customization',
+    name: 'Customization',
+    Component: Customization,
+  },
+  { path: '/recipies:id', name: 'OneRecipe', Component: OneRecipe },
+  { path: '/chat', name: 'Home', Component: Home },
+  { path: '/chat/:roomId', name: 'ChatRoom', Component: ChatRoom },
+];
+
 function Routes() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          <Navbar />
-          <Recipes />
-        </Route>
-        <Route exact path="/signIn">
-          <SignIn />
-        </Route>
-        <Route exact path="/signUp">
-          <SignUp />
-        </Route>
-        <Route exact path="/profile">
-          <Navbar />
-          <Profile />
-        </Route>
-        <Route exact path="/my-recipies">
-          <Navbar />
-          <MyRecipies />
-        </Route>
-        <Route path="/profile/customization">
-          <Navbar />
-          <Customization />
-        </Route>
-        <Route exact path="/recipies:id">
-          <Navbar />
-          <OneRecipe />
-        </Route>
-        <Route exact path="/chat">
-          <Navbar />
-          <Home />
-        </Route>
-        <Route exact path="/:roomId">
-          <Navbar />
-          <ChatRoom />
-        </Route>
+        {routes.map(({ path, Component }) => {
+          return (
+            <Route exact path={path}>
+              <Navbar />
+              <Component />
+            </Route>
+          );
+        })}
       </Switch>
     </Router>
   );

@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon -L app",
+    "start": "supervisor app",
     "test": "mocha *.test.js"
   },
   "author": "RZ",
@@ -29,6 +29,7 @@
     "qrcode": "^1.4.4",
     "sequelize": "^6.6.2",
     "socket.io": "^4.0.2",
-    "speakeasy": "^2.0.0"
+    "speakeasy": "^2.0.0",
+    "supervisor": "^0.12.0"
   }
 }

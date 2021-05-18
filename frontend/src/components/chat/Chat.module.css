@@ -1,0 +1,133 @@
+.chatHome {
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  margin: 30px auto 0px;
+  display: flex;
+  flex-direction: column;
+}
+.chatHome a {
+  text-decoration: none;
+  width: 0;
+}
+.chatHome select {
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}
+.chatHome button {
+  background: #fdc608;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  font-family: Montserrat, serif;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  width: auto;
+  margin-top: 12px;
+}
+
+.chatRoom {
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  margin: 30px auto 0px;
+  display: flex;
+  flex-direction: column;
+}
+.roomName {
+  font-size: 20px;
+}
+
+.userList {
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 20px 0px;
+}
+.userList ul {
+  list-style: none;
+}
+.userList li {
+  display: inline;
+  margin-right: 5px;
+  color: orange;
+}
+
+.messageList {
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0px 0px 20px;
+}
+
+.message {
+  background-color: rgb(216, 216, 238);
+  margin: 10px 0px;
+  padding: 10px;
+  border-radius: 5px;
+  width: auto;
+}
+.senderInfo {
+  display: flex;
+  justify-content: space-between;
+}
+.senderName {
+  color: white;
+  font-weight: 900;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.messageTime {
+  font-size: 12px;
+  color: gray;
+}
+.messageText i {
+  display: block;
+  margin-top: 16px;
+  font-size: 14px;
+}
+.messageText i:hover {
+  color: orange;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: 0;
+}
+
+.messageForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.messageForm input {
+  width: 80%;
+  padding: 12px 2px;
+  background: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+  outline: none;
+}
+.messageForm button {
+  padding: 12px;
+  background-color: inherit;
+  border: none;
+  margin: 0 5px;
+  border-radius: 5px;
+}
+.messageForm button:hover {
+  background-color: orange;
+  cursor: pointer;
+  transition: 0.3s ease;
+}

@@ -24,42 +24,30 @@ app.use('/', router);
 //////////////////////////////////SOCKET//////////////////////////////////////////////////////////////////////
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.CLIENT_URL,
   },
 });
 
-// получаем обработчики событий
 const registerMessageHandlers = require('./handlers/messageHandlers');
 const registerUserHandlers = require('./handlers/userHandlers');
 
 const onConnection = (socket) => {
-  // выводим сообщение о подключении пользователя
   console.log('User connected');
 
-  // получаем название комнаты из строки запроса "рукопожатия"
   const { roomId } = socket.handshake.query;
-  // сохраняем название комнаты в соответствующем свойстве сокета
   socket.roomId = roomId;
 
-  // присоединяемся к комнате (входим в нее)
   socket.join(roomId);
-
-  // регистрируем обработчики
-  // обратите внимание на передаваемые аргументы
 
   registerMessageHandlers(io, socket);
   registerUserHandlers(io, socket);
 
-  // обрабатываем отключение сокета-пользователя
   socket.on('disconnect', () => {
-    // выводим сообщение
     console.log('User disconnected');
-    // покидаем комнату
     socket.leave(roomId);
   });
 };
 
-//function onConnection performed with evere socket connection
 io.on('connection', onConnection);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

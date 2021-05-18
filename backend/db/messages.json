@@ -1,0 +1,39 @@
+{
+  "messages": [
+    {
+      "messageId": "1",
+      "userId": "1",
+      "senderName": "Bob",
+      "messageText": "What are you doing here?",
+      "createdAt": "2021-01-14"
+    },
+    {
+      "messageId": "2",
+      "userId": "2",
+      "senderName": "Alice",
+      "messageText": "Go back to work!",
+      "createdAt": "2021-02-15"
+    },
+    {
+      "messageId": "97wHs_k_",
+      "createdAt": "2021-05-18T12:03:50.976Z",
+      "userId": "X_nu9ciE",
+      "messageText": "HELL",
+      "senderName": "RomaZherko210@gmail.com"
+    },
+    {
+      "messageId": "RMV3Ouei",
+      "createdAt": "2021-05-18T12:14:20.428Z",
+      "userId": "X_nu9ciE",
+      "messageText": "asdasdasd",
+      "senderName": "RomaZherko210@gmail.com"
+    },
+    {
+      "messageId": "HC0qTYil",
+      "createdAt": "2021-05-18T12:27:12.538Z",
+      "userId": "X_nu9ciE",
+      "messageText": "asdasdasd",
+      "senderName": "RomaZherko210@gmail.com"
+    }
+  ]
+}
