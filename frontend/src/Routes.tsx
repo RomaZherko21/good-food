@@ -8,8 +8,8 @@ import SignUp from './components/signUp/SignUp';
 import Customization from './components/profile/customization/Customization';
 import MyRecipies from './components/myRecipies/MyRecipies';
 import OneRecipe from './components/recipes/oneRecipe/OneRecipe';
-import { Home } from './components/chat/Home';
-import { ChatRoom } from './components/chat/ChatRoom';
+import Home from './components/chat/Home';
+import ChatRoom from './components/chat/ChatRoom';
 
 const routes = [
   { path: '/', name: 'Recipes', Component: Recipes },

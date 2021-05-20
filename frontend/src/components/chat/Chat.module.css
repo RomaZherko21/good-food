@@ -55,10 +55,8 @@
   margin: 20px 0px;
 }
 .userList ul {
-  list-style: none;
 }
 .userList li {
-  display: inline;
   margin-right: 5px;
   color: orange;
 }
@@ -89,6 +87,10 @@
 .messageTime {
   font-size: 12px;
   color: gray;
+}
+.messageText {
+  text-overflow: clip;
+  overflow: hidden;
 }
 .messageText i {
   display: block;

@@ -8,7 +8,10 @@ export const MessageListItem = ({ msg, removeMessage }) => {
 
   const { messageId, messageText, senderName, createdAt, currentUser } = msg;
   return (
-    <div className={s.message}>
+    <div
+      className={s.message}
+      style={{ backgroundColor: currentUser ? '' : '#62a5a1' }}
+    >
       <div className={s.senderInfo}>
         <div className={s.senderName}> {senderName}</div>
         <div className={s.messageTime}>
@@ -17,7 +20,7 @@ export const MessageListItem = ({ msg, removeMessage }) => {
       </div>
 
       <div className={s.messageText}>
-        <span>{messageText}</span>
+        <p>{messageText}</p>
         {currentUser && (
           <i
             onClick={() => handleRemoveMessage(messageId)}

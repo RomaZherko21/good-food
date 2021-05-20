@@ -1,15 +1,9 @@
 import s from './Chat.module.css';
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import { useLocalStorage } from '../../hooks/useLocalstorage';
-import { AppContext } from '../../state/context';
 
-export function Home() {
-  const { state } = useContext(AppContext);
+function Home() {
   const [roomId, setRoomId] = useState('free');
-  // useEffect(() => {
-  //   window.localStorage.setItem('username', state.user.email);
-  // }, []);
 
   const handleChangeRoom = (e) => {
     setRoomId(e.target.value);
@@ -30,3 +24,5 @@ export function Home() {
     </div>
   );
 }
+
+export default Home;

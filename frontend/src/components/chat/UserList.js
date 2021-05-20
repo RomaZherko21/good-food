@@ -2,12 +2,9 @@ import s from './Chat.module.css';
 
 export const UserList = ({ users }) => {
   const usersArr = Object.entries(users);
-  // получаем массив вида (массив подмассивов)
   // [ ['1', { username: 'Alice', online: false }], ['2', {username: 'Bob', online: false}] ]
 
-  const activeUsers = Object.values(users)
-    // [ {username: 'Alice', online: false}, {username: 'Bob', online: false} ]
-    .filter((u) => u.online).length;
+  const activeUsers = Object.values(users).filter((u) => u.online).length;
 
   return (
     <div className={s.userList}>

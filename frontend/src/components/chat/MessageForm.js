@@ -1,9 +1,7 @@
 import s from './Chat.module.css';
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { Picker } from 'emoji-mart';
-import { FiSend } from 'react-icons/fi';
-import { GrEmoji } from 'react-icons/gr';
+import 'emoji-mart/css/emoji-mart.css';
 
 export const MessageForm = ({ username, sendMessage }) => {
   const [text, setText] = useState('');
@@ -47,7 +45,6 @@ export const MessageForm = ({ username, sendMessage }) => {
           <i class="fas fa-paper-plane"></i>
         </button>
       </div>
-      {/* эмодзи */}
       {showEmoji && <Picker onSelect={handleEmojiSelect} emojiSize={20} />}
     </>
   );

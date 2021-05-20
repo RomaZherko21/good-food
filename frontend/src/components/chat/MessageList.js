@@ -5,7 +5,6 @@ import { MessageListItem } from './MessageListItem';
 
 export const MessageList = ({ messages, removeMessage }) => {
   const messagesEndRef = useRef(null);
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
       behavior: 'smooth',
