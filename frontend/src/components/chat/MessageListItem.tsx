@@ -1,8 +1,15 @@
 import s from './Chat.module.css';
 import TimeAgo from 'react-timeago';
+import { MessageType, removeMessageType } from './types';
 
-export const MessageListItem = ({ msg, removeMessage }) => {
-  const handleRemoveMessage = (id) => {
+export const MessageListItem = ({
+  msg,
+  removeMessage,
+}: {
+  msg: MessageType;
+  removeMessage: removeMessageType;
+}) => {
+  const handleRemoveMessage = (id: string) => {
     removeMessage(id);
   };
 
@@ -24,7 +31,7 @@ export const MessageListItem = ({ msg, removeMessage }) => {
         {currentUser && (
           <i
             onClick={() => handleRemoveMessage(messageId)}
-            class="fas fa-trash"
+            className="fas fa-trash"
           ></i>
         )}
       </div>

@@ -14,11 +14,13 @@ module.exports = (io, socket) => {
     } else {
       users[userId].online = true;
     }
+    console.log(`${username} connected`);
     getUsers();
   };
 
-  const removeUser = (userId) => {
+  const removeUser = ({ userId, username }) => {
     users[userId].online = false;
+    console.log(`${username} disconnected`);
     getUsers();
   };
 

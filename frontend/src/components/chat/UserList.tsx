@@ -1,9 +1,8 @@
 import s from './Chat.module.css';
+import { usersType } from './types';
 
-export const UserList = ({ users }) => {
+const UserList = ({ users }: { users: usersType }) => {
   const usersArr = Object.entries(users);
-  // [ ['1', { username: 'Alice', online: false }], ['2', {username: 'Bob', online: false}] ]
-
   const activeUsers = Object.values(users).filter((u) => u.online).length;
 
   return (
@@ -11,9 +10,10 @@ export const UserList = ({ users }) => {
       <span>Active users: {activeUsers}</span>
       <ul>
         {usersArr.map(([userId, obj]) => (
-          <li>{obj.username}</li>
+          <li key={userId}>{obj.username}</li>
         ))}
       </ul>
     </div>
   );
 };
+export default UserList;

@@ -2,12 +2,19 @@ import s from './Chat.module.css';
 import { useState } from 'react';
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
+import { sendMessageType } from './types';
 
-export const MessageForm = ({ username, sendMessage }) => {
-  const [text, setText] = useState('');
-  const [showEmoji, setShowEmoji] = useState(false);
+const MessageForm = ({
+  username,
+  sendMessage,
+}: {
+  username: string;
+  sendMessage: sendMessageType;
+}) => {
+  const [text, setText] = useState<string>('');
+  const [showEmoji, setShowEmoji] = useState<boolean>(false);
 
-  const handleChangeText = (e) => {
+  const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
 
@@ -15,13 +22,13 @@ export const MessageForm = ({ username, sendMessage }) => {
     setShowEmoji((v) => !v);
   };
 
-  const handleEmojiSelect = (e) => {
+  const handleEmojiSelect = (e: any) => {
     setText((text) => (text += e.native));
   };
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const trimmed = text.trim();
+    const trimmed: string = text.trim();
     if (trimmed) {
       sendMessage({ messageText: text, senderName: username });
       setText('');
@@ -31,8 +38,8 @@ export const MessageForm = ({ username, sendMessage }) => {
   return (
     <>
       <div className={s.messageForm}>
-        <button variant="primary" type="button" onClick={handleEmojiShow}>
-          <i class="fas fa-smile"></i>
+        <button type="button" onClick={handleEmojiShow}>
+          <i className="fas fa-smile"></i>
         </button>
 
         <input
@@ -42,10 +49,12 @@ export const MessageForm = ({ username, sendMessage }) => {
           placeholder="Message..."
         />
         <button onClick={handleSendMessage}>
-          <i class="fas fa-paper-plane"></i>
+          <i className="fas fa-paper-plane"></i>
         </button>
       </div>
       {showEmoji && <Picker onSelect={handleEmojiSelect} emojiSize={20} />}
     </>
   );
 };
+
+export default MessageForm;

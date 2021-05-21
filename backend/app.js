@@ -32,8 +32,6 @@ const registerMessageHandlers = require('./handlers/messageHandlers');
 const registerUserHandlers = require('./handlers/userHandlers');
 
 const onConnection = (socket) => {
-  console.log('User connected');
-
   const { roomId } = socket.handshake.query;
   socket.roomId = roomId;
 
@@ -43,7 +41,6 @@ const onConnection = (socket) => {
   registerUserHandlers(io, socket);
 
   socket.on('disconnect', () => {
-    console.log('User disconnected');
     socket.leave(roomId);
   });
 };

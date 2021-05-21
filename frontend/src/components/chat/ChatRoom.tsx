@@ -2,16 +2,18 @@ import s from './Chat.module.css';
 import { useParams } from 'react-router-dom';
 
 import { useChat } from '../../hooks/useChat';
-import { MessageForm } from './MessageForm';
-import { MessageList } from './MessageList';
-import { UserList } from './UserList';
+import MessageForm from './MessageForm';
+import MessageList from './MessageList';
+import UserList from './UserList';
 import { AppContext } from '../../state/context';
 import { useContext } from 'react';
+import { messagesType, usersType } from './types';
 
 function ChatRoom() {
   const { state } = useContext(AppContext);
-  const { roomId } = useParams();
-  const { users, messages, sendMessage, removeMessage } = useChat(roomId);
+  const { roomId } = useParams<{ roomId: string }>();
+  const { users, messages, sendMessage, removeMessage } =
+    useChat<usersType, messagesType>(roomId);
 
   return (
     <div className={s.chatRoom}>

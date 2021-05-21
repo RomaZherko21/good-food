@@ -2,10 +2,10 @@ import s from './Chat.module.css';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-function Home() {
-  const [roomId, setRoomId] = useState('free');
+const Home: React.FC = () => {
+  const [roomId, setRoomId] = useState<string>('free');
 
-  const handleChangeRoom = (e) => {
+  const handleChangeRoom = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRoomId(e.target.value);
   };
 
@@ -23,6 +23,6 @@ function Home() {
       </NavLink>
     </div>
   );
-}
+};
 
 export default Home;

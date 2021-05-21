@@ -2,15 +2,21 @@ import s from './Chat.module.css';
 import { useRef, useEffect } from 'react';
 
 import { MessageListItem } from './MessageListItem';
+import { MessageType, removeMessageType } from './types';
 
-export const MessageList = ({ messages, removeMessage }) => {
-  const messagesEndRef = useRef(null);
+const MessageList = ({
+  messages,
+  removeMessage,
+}: {
+  messages: MessageType[];
+  removeMessage: removeMessageType;
+}) => {
+  const messagesEndRef = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
       behavior: 'smooth',
     });
   }, [messages]);
-
   return (
     <div className={s.messageList}>
       {messages.map((msg) => (
@@ -24,3 +30,4 @@ export const MessageList = ({ messages, removeMessage }) => {
     </div>
   );
 };
+export default MessageList;
