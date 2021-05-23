@@ -36,6 +36,7 @@ const validate = (values: AuthFieldsType) => {
 const SignIn: React.FC = () => {
   const [err, setErr] = useState<string>('');
   const { dispatch } = useContext(AppContext);
+
   const formik = useFormik({
     initialValues: {
       password: '',
@@ -71,18 +72,8 @@ const SignIn: React.FC = () => {
       <h1>Sign In</h1>
       <form onSubmit={formik.handleSubmit}>
         <Input text="Email Address" name="email" type="email" formik={formik} />
-        <Input
-          text="Password"
-          type="password"
-          name="password"
-          formik={formik}
-        />
-        <Input
-          text="Google Authenticator token"
-          type="password"
-          name="token"
-          formik={formik}
-        />
+        <Input text="Password" type="password" name="password" formik={formik} />
+        <Input text="Google Authenticator token" type="password" name="token" formik={formik} />
         <button type="submit">Submit</button>
         <span className={s.err}>{err}</span>
       </form>

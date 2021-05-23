@@ -33,7 +33,7 @@ function Routes() {
       <Switch>
         {routes.map(({ path, Component }) => {
           return (
-            <Route exact path={path}>
+            <Route key={path} exact path={path}>
               <Navbar />
               <Component />
             </Route>

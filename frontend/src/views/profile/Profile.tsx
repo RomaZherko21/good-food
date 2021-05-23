@@ -6,10 +6,12 @@ import { AppContext } from '../../state/context';
 
 const Profile = () => {
   const { state } = useContext(AppContext);
+
   let userMetaData;
   if (state.user.meta) {
     userMetaData = Object.entries(state.user.meta);
   }
+
   return (
     <section className={s.profile}>
       <div className={s.profileInfo}>
@@ -27,9 +29,7 @@ const Profile = () => {
               <li key={item[0]}>
                 {item[0]}:
                 {Array.isArray(item[1]) ? (
-                  item[1].map((elem: string) => (
-                    <span key={elem}>{elem}; </span>
-                  ))
+                  item[1].map((elem: string) => <span key={elem}>{elem}; </span>)
                 ) : (
                   <span> {item[1]}</span>
                 )}

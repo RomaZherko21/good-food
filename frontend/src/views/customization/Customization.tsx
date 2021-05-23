@@ -50,13 +50,32 @@ const Customization = () => {
     'Germany',
   ];
 
+  const onSubmit = (values: MetaDataType) => {
+    serverAPI<UserType>(
+      '/customers/changeMetaData',
+      { ...state.user, meta: JSON.stringify(values) },
+      () => {
+        dispatch({
+          type: Types.MetaChange,
+          payload: {
+            ...state.user,
+            meta: { ...values },
+          },
+        });
+        window.history.back();
+      },
+      (message) => {
+        setErr(message);
+      }
+    );
+  };
+
   return (
     <section className={s.customization}>
       <h1>PROFILE</h1>
       <p>
-        Do you have any dietary requirements? Would you love some more
-        kid-friendly recipes? We’ll send you delicious recipes that suit your
-        needs.
+        Do you have any dietary requirements? Would you love some more kid-friendly recipes? We’ll
+        send you delicious recipes that suit your needs.
       </p>
       <Formik
         initialValues={{
@@ -66,33 +85,13 @@ const Customization = () => {
           birthday: '',
           diet: [],
         }}
-        onSubmit={(values: MetaDataType) => {
-          serverAPI<UserType>(
-            '/customers/changeMetaData',
-            { ...state.user, meta: JSON.stringify(values) },
-            () => {
-              dispatch({
-                type: Types.MetaChange,
-                payload: {
-                  ...state.user,
-                  meta: { ...values },
-                },
-              });
-              window.history.back();
-            },
-            (message) => {
-              setErr(message);
-            }
-          );
-        }}
+        onSubmit={onSubmit}
       >
         {({ errors, touched, values }) => (
           <Form>
             <label htmlFor="name">Name</label>
             <Field validate={validateName} name="name" type="name" />
-            {errors.name && touched.name ? (
-              <span className={s.err}>{errors.name}</span>
-            ) : null}
+            {errors.name && touched.name ? <span className={s.err}>{errors.name}</span> : null}
 
             <label htmlFor="surname">Surname</label>
             <Field validate={validateName} name="surname" />

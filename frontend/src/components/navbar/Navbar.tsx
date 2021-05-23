@@ -10,6 +10,14 @@ const Header: React.FC = () => {
 
   const navLinks: string[] = ['discover', 'nutrition', 'chat'];
 
+  const onExit = () => {
+    dispatch({
+      type: Types.SignIn,
+      payload: { ...initialState.user },
+    });
+    document.cookie = `password=undefined`;
+  };
+
   return (
     <nav className={s.nav}>
       <h1>
@@ -34,20 +42,9 @@ const Header: React.FC = () => {
           </NavLink>
           <NavLink exact to="/my-recipies">
             <i className="fas fa-pizza-slice"></i>
-            <div className={s.cartAmount}>
-              {state.shoppingCart.products.length}
-            </div>
+            <div className={s.cartAmount}>{state.shoppingCart.products.length}</div>
           </NavLink>
-          <i
-            className="fas fa-door-open"
-            onClick={() => {
-              dispatch({
-                type: Types.SignIn,
-                payload: { ...initialState.user },
-              });
-              document.cookie = `password=undefined`;
-            }}
-          ></i>
+          <i className="fas fa-door-open" onClick={onExit}></i>
         </div>
       ) : (
         <div className={s.authBtn}>

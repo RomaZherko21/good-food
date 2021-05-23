@@ -21,9 +21,7 @@ const Input = ({
         onBlur={formik.handleBlur}
       />
       <span className="inputErr">
-        {formik.touched[name] && formik.errors[name] ? (
-          <div>{formik.errors[name]}</div>
-        ) : null}
+        {formik.touched[name] && formik.errors[name] ? <div>{formik.errors[name]}</div> : null}
       </span>
     </>
   );
