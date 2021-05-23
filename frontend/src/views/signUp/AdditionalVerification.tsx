@@ -6,7 +6,7 @@ import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
 import { AuthFieldsType } from '../../types';
 import { serverAPI } from '../../api/serverAPI';
-import AuthInput from '../common/AuthInput';
+import Input from '../../components/form/Input';
 
 const validate = (values: { token: string }) => {
   const errors = {} as AuthFieldsType;
@@ -60,7 +60,7 @@ const AdditionalVerification: React.FC<{
   return (
     <form className={s.additAuth} onSubmit={formik.handleSubmit}>
       <div className={s.emailChecked}>
-        <AuthInput
+        <Input
           text="Token that we sended on your email..."
           name="token"
           type="text"

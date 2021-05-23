@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/navbar/Navbar';
-import Profile from './components/profile/Profile';
+import Profile from './views/profile/Profile';
 import Recipes from './components/recipes/Recipes';
-import SignIn from './components/signIn/SignIn';
-import SignUp from './components/signUp/SignUp';
-import Customization from './components/profile/customization/Customization';
-import MyRecipies from './components/myRecipies/MyRecipies';
-import OneRecipe from './components/recipes/oneRecipe/OneRecipe';
-import Home from './components/chat/Home';
-import ChatRoom from './components/chat/ChatRoom';
+import SignIn from './views/signIn/SignIn';
+import SignUp from './views/signUp/SignUp';
+import Customization from './views/customization/Customization';
+import MyRecipies from './views/myRecipies/MyRecipies';
+import OneRecipe from './components/oneRecipe/OneRecipe';
+import Home from './views/chat/Home';
+import ChatRoom from './views/chat/ChatRoom';
 
 const routes = [
   { path: '/', name: 'Recipes', Component: Recipes },

@@ -6,7 +6,7 @@ import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
 import { AuthFieldsType } from '../../types';
 import { serverAPI } from '../../api/serverAPI';
-import AuthInput from '../common/AuthInput';
+import Input from '../../components/form/Input';
 
 const validate = (values: AuthFieldsType) => {
   const errors = {} as AuthFieldsType;
@@ -70,19 +70,14 @@ const SignIn: React.FC = () => {
     <section className={s.signIn}>
       <h1>Sign In</h1>
       <form onSubmit={formik.handleSubmit}>
-        <AuthInput
-          text="Email Address"
-          name="email"
-          type="email"
-          formik={formik}
-        />
-        <AuthInput
+        <Input text="Email Address" name="email" type="email" formik={formik} />
+        <Input
           text="Password"
           type="password"
           name="password"
           formik={formik}
         />
-        <AuthInput
+        <Input
           text="Google Authenticator token"
           type="password"
           name="token"

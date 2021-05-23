@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { AuthFieldsType } from '../../types';
 import { serverAPI } from '../../api/serverAPI';
-import AuthInput from '../common/AuthInput';
+import Input from '../../components/form/Input';
 
 const validate = (values: AuthFieldsType) => {
   const errors = {} as AuthFieldsType;
@@ -55,18 +55,8 @@ const MainFields: React.FC<{
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <AuthInput
-        text="Email Address"
-        name="email"
-        type="email"
-        formik={formik}
-      />
-      <AuthInput
-        text="Password"
-        name="password"
-        type="password"
-        formik={formik}
-      />
+      <Input text="Email Address" name="email" type="email" formik={formik} />
+      <Input text="Password" name="password" type="password" formik={formik} />
       <button type="submit">Submit</button>
       <span className={s.err}>{err}</span>
     </form>

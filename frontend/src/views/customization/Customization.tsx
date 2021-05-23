@@ -2,11 +2,11 @@ import s from './Customization.module.css';
 import { Formik, Form, Field } from 'formik';
 import { useContext, useState } from 'react';
 
-import { serverAPI } from '../../../api/serverAPI';
-import { AppContext } from '../../../state/context';
-import { MetaDataType } from '../../../types';
-import { Types } from '../../../state/reducers';
-import { UserType } from '../../../types';
+import { serverAPI } from '../../api/serverAPI';
+import { AppContext } from '../../state/context';
+import { MetaDataType } from '../../types';
+import { Types } from '../../state/reducers';
+import { UserType } from '../../types';
 
 const validateName = (value: string) => {
   let errors: string = '';

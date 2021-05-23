@@ -2,9 +2,9 @@ import s from './OneRecipe.module.css';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
-import { AppContext } from '../../../state/context';
-import { Types } from '../../../state/reducers';
-import { ProductType } from '../../../types';
+import { AppContext } from '../../state/context';
+import { Types } from '../../state/reducers';
+import { ProductType } from '../../types';
 
 function Recipes() {
   const { state, dispatch } = useContext(AppContext);

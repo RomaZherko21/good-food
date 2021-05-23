@@ -19,6 +19,7 @@ export const serverAPI = <ValueType>(
       err(message);
     });
 };
+
 export const productAPI = (
   URL: string,
   callback: (response: any) => void,
@@ -39,6 +40,7 @@ export const productAPI = (
       err(message);
     });
 };
+
 export const cookiesAPI = (callback: (response: any) => void) => {
   axios
     .get(`${process.env.REACT_APP_SERVER_URL}/auth/cookie`, {

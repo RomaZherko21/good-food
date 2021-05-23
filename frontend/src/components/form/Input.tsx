@@ -1,4 +1,4 @@
-const AuthInput = ({
+const Input = ({
   text,
   type,
   name,
@@ -29,4 +29,4 @@ const AuthInput = ({
   );
 };
 
-export default AuthInput;
+export default Input;
