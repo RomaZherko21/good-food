@@ -4,14 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Purpose
 
-This project is something like food blog, where you can create account, create your own recipes and communicate with other bloggers.\
-\
+This project is something like food blog, where you can create account, create your own recipes and communicate with other bloggers.
 
-### This project was created to practise with:\
+### This project was created to practise with:
 
 - **_Backend:_** MySQL, express, sequelize, socketIO, lowDB;
 - **_Frontend:_** React, react hooks, TypeScript;
-- **_Tests:_** react-testing-library, supertest;
+- **_Testing:_** react-testing-library, supertest;
 - **_DevOps:_** docker.
 
 ## Installation
@@ -26,7 +25,7 @@ In the project directory, you can run:
 
 ### `npm start` on backend and frontend folders
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 
 ### `npm test` on backend and frontend folders
 
