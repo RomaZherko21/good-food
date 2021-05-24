@@ -1,8 +1,31 @@
-# web-api
-Web-api was created to practise with backend technologies, used libs: MySQL, express, sequelize.
+# Good food
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# Purpose
+
+This project is something like food blog, where you can create account, create your own recipes and communicate with other bloggers.\
+\
+This project was created to practise with:\
+Backend (MySQL, express, sequelize, socketIO, lowDB)\
+Frontend (React, react hooks, TypeScript) technologies\
+Tests (react-testing-library, supertest)\
+DevOps (docker)
 
 ## Installation
 
-* 'npm install' and then 'npm start' in /backend and /frontend folders.
-* .env file on backend need your own configuration.
-* create local MySQL DB.
+- 'npm install' and then 'npm start' on /backend and /frontend folders.
+- .env file on backend need your own configuration.
+- you need to run local MySQL DB.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start` on backend and frontend folders
+
+Runs the app in the development mode.\
+
+### `npm test` on backend and frontend folders
+
+Launches the test runner in the interactive watch mode.
