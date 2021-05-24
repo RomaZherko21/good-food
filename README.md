@@ -6,11 +6,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project is something like food blog, where you can create account, create your own recipes and communicate with other bloggers.\
 \
-This project was created to practise with:\
-Backend (MySQL, express, sequelize, socketIO, lowDB)\
-Frontend (React, react hooks, TypeScript) technologies\
-Tests (react-testing-library, supertest)\
-DevOps (docker)
+
+### This project was created to practise with:\
+
+- **_Backend:_** MySQL, express, sequelize, socketIO, lowDB;
+- **_Frontend:_** React, react hooks, TypeScript;
+- **_Tests:_** react-testing-library, supertest;
+- **_DevOps:_** docker.
 
 ## Installation
 
