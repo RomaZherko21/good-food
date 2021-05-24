@@ -2,7 +2,7 @@ import s from './Chat.module.css';
 import { useState } from 'react';
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
-import { sendMessageType } from './types';
+import { sendMessageType } from './chatTypes';
 
 const MessageForm = ({
   username,
@@ -42,12 +42,7 @@ const MessageForm = ({
           <i className="fas fa-smile"></i>
         </button>
 
-        <input
-          value={text}
-          onChange={handleChangeText}
-          type="text"
-          placeholder="Message..."
-        />
+        <input value={text} onChange={handleChangeText} type="text" placeholder="Message..." />
         <button onClick={handleSendMessage}>
           <i className="fas fa-paper-plane"></i>
         </button>

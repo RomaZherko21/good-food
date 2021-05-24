@@ -1,12 +1,9 @@
-import s from './MyRecipies.module.css';
-import { useContext } from 'react';
+import s from './RecipesList.module.css';
 import { useHistory } from 'react-router';
 
-import { AppContext } from '../../state/context';
 import { ProductType } from '../../types';
 
-function MyRecipies() {
-  const { state } = useContext(AppContext);
+function RecipesList({ products }: { products: ProductType[] }) {
   let history = useHistory();
 
   const onSelectItem = (e: any) => {
@@ -21,7 +18,7 @@ function MyRecipies() {
     <section className={s.recipes}>
       <h1>My recipes...</h1>
       <div className={s.recipesList}>
-        {state.shoppingCart.products.map((item: ProductType) => {
+        {products.map((item: ProductType) => {
           return (
             <div key={item.id} id={String(item.id)} onClick={onSelectItem}>
               <img
@@ -31,6 +28,13 @@ function MyRecipies() {
                 }}
                 alt={item.name}
               />
+              <div className={s.recipeTimer}>
+                <i className="far fa-clock"></i>
+                {typeof item.timers === 'string'
+                  ? JSON.parse(item.timers).reduce((pre: number, val: number) => pre + val)
+                  : item.timers.reduce((pre: number, val: number) => pre + val)}{' '}
+                min.
+              </div>
               <h4>{item.name}</h4>
             </div>
           );
@@ -40,4 +44,4 @@ function MyRecipies() {
   );
 }
 
-export default MyRecipies;
+export default RecipesList;

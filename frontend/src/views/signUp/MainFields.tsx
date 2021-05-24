@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 
 import { AuthFieldsType } from '../../types';
-import { serverAPI } from '../../api/serverAPI';
+import serverAPI from '../../api/serverAPI';
 import Input from '../../components/form/Input';
 
 const validate = (values: AuthFieldsType) => {
@@ -38,7 +38,7 @@ const MainFields: React.FC<{
     },
     validate,
     onSubmit: (values) => {
-      serverAPI(
+      serverAPI.post(
         '/auth/signUp',
         values,
         (response) => {

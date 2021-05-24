@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react';
-import { cookiesAPI } from '../api/serverAPI';
+import serverAPI from '../api/serverAPI';
 import { AppContext } from '../state/context';
 import { Types } from '../state/reducers';
 
 const useCookies = () => {
   const { dispatch } = useContext(AppContext);
   useEffect(() => {
-    cookiesAPI((response) => {
+    serverAPI.cookies((response) => {
       dispatch({
         type: Types.SignIn,
         payload: {

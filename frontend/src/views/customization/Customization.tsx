@@ -2,9 +2,9 @@ import s from './Customization.module.css';
 import { Formik, Form, Field } from 'formik';
 import { useContext, useState } from 'react';
 
-import { serverAPI } from '../../api/serverAPI';
+import serverAPI from '../../api/serverAPI';
 import { AppContext } from '../../state/context';
-import { MetaDataType } from '../../types';
+import { UserMetaDataType } from '../../types';
 import { Types } from '../../state/reducers';
 import { UserType } from '../../types';
 
@@ -50,8 +50,8 @@ const Customization = () => {
     'Germany',
   ];
 
-  const onSubmit = (values: MetaDataType) => {
-    serverAPI<UserType>(
+  const onSubmit = (values: UserMetaDataType) => {
+    serverAPI.post<UserType>(
       '/customers/changeMetaData',
       { ...state.user, meta: JSON.stringify(values) },
       () => {

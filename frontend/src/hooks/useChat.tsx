@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 import { useBeforeUnload } from './useBeforeUnload';
 import { AppContext } from '../state/context';
-import { messageType } from '../views/chat/types';
+import { messageType } from '../views/chat/chatTypes';
 
 const SERVER_URL: string | undefined = process.env.REACT_APP_SERVER_URL;
 

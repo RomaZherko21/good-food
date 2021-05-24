@@ -28,39 +28,6 @@
   margin-top: 5px;
 }
 
-.filters {
-  margin-top: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  list-style: none;
-}
-.filters span {
-  color: #000;
-  font-family: Montserrat, Georgia, serif;
-  font-size: 12px;
-  font-weight: 400;
-  margin-right: 20px;
-  text-transform: uppercase;
-}
-.filters li {
-  cursor: pointer;
-  background-color: #b6b6b6;
-  color: #fff;
-  display: inline-block;
-  font-family: Montserrat, Georgia, serif;
-  font-size: 10px;
-  font-weight: 700;
-  margin-bottom: 5px;
-  margin-right: 10px;
-  padding: 6px 12px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.3s ease-in-out 0s;
-}
-.filters li:hover {
-  background-color: #62a5a1;
-}
 .recipesList {
   padding: 30px;
   display: flex;
@@ -69,14 +36,12 @@
   flex-wrap: wrap;
   text-align: left;
 }
-.recipesList div {
+.recipesList .recipe {
   width: auto;
   margin: 8px;
   cursor: pointer;
-
-  width: 200px;
-  height: 220px;
 }
+
 .recipesList div h4 {
   color: #a3865b;
   display: block;
@@ -89,20 +54,21 @@
   overflow: hidden;
   text-transform: uppercase;
 }
-.recipesList div p {
-  font-family: Average, serif;
-  font-weight: lighter;
-  font-size: 19px;
-  line-height: 25px;
-  margin-bottom: 15px;
-}
 .recipesList div img {
   width: 200px;
-  height: 150px;
+  height: 300px;
+  object-fit: cover;
 }
-.recipesList div:hover > p {
+.recipesList div:hover > h4 {
   color: #62a5a1;
   transition: 0.3s ease;
+}
+.recipesList div:hover {
+  cursor: pointer;
+}
+.recipesList div {
+  margin-right: 10px;
+  margin-top: 20px;
 }
 
 .recipes button {
@@ -125,4 +91,22 @@
 
 .recipes button:hover {
   background-color: #61a5a0;
+}
+.recipeCount {
+  color: #c3c3c3;
+  font-size: 15px;
+  font-family: Georgia;
+  letter-spacing: 1px;
+}
+.recipeTimer {
+  margin-top: 10px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: #a3865b;
+  font-size: 14px;
+}
+.recipeTimer i {
+  margin-right: 10px;
+  color: #000;
 }

@@ -1,10 +1,11 @@
 import s from './OneRecipe.module.css';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
 import { ProductType } from '../../types';
+import onImgErr from '../../helpers/onImgErr';
 
 function Recipes() {
   const { state, dispatch } = useContext(AppContext);
@@ -36,10 +37,6 @@ function Recipes() {
       payload: recipe,
     });
   };
-  const onImgErr = (e: any) => {
-    e.target.onerror = null;
-    e.target.src = recipe.originalURL;
-  };
 
   return (
     <section className={s.recipe}>
@@ -50,7 +47,11 @@ function Recipes() {
           <ul>
             <h1>{recipe.name}</h1>
             <li>
-              <img src={recipe.imageURL} onError={onImgErr} alt={recipe.name} />
+              <img
+                src={recipe.imageURL}
+                onError={onImgErr.bind(null, recipe.originalURL)}
+                alt={recipe.name}
+              />
             </li>
             <li className={s.ingredients}>
               <span> Ingredients:</span>

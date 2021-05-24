@@ -1,5 +1,5 @@
 import s from './Chat.module.css';
-import { usersType } from './types';
+import { usersType } from './chatTypes';
 
 const UserList = ({ users }: { users: usersType }) => {
   const usersArr = Object.entries(users);

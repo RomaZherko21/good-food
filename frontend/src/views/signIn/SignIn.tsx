@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { AppContext } from '../../state/context';
 import { Types } from '../../state/reducers';
 import { AuthFieldsType } from '../../types';
-import { serverAPI } from '../../api/serverAPI';
+import serverAPI from '../../api/serverAPI';
 import Input from '../../components/form/Input';
 
 const validate = (values: AuthFieldsType) => {
@@ -45,7 +45,7 @@ const SignIn: React.FC = () => {
     },
     validate,
     onSubmit: (values) => {
-      serverAPI<AuthFieldsType>(
+      serverAPI.post<AuthFieldsType>(
         '/auth/signIn',
         values,
         (response) => {

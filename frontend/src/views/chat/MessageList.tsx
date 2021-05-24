@@ -2,7 +2,7 @@ import s from './Chat.module.css';
 import { useRef, useEffect } from 'react';
 
 import { MessageListItem } from './MessageListItem';
-import { MessageType, removeMessageType } from './types';
+import { MessageType, removeMessageType } from './chatTypes';
 
 const MessageList = ({
   messages,
@@ -20,11 +20,7 @@ const MessageList = ({
   return (
     <div className={s.messageList}>
       {messages.map((msg) => (
-        <MessageListItem
-          key={msg.messageId}
-          msg={msg}
-          removeMessage={removeMessage}
-        />
+        <MessageListItem key={msg.messageId} msg={msg} removeMessage={removeMessage} />
       ))}
       <span ref={messagesEndRef}></span>
     </div>
