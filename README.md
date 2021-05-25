@@ -2,9 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Purpose
+## Purpose
 
-This project is something like food blog, where you can create account, create your own recipes and communicate with other bloggers.
+This project is something like food blog, where you can create account, compose your own recipes and communicate with other bloggers.
 
 ### This project was created to practise with:
 
@@ -15,9 +15,9 @@ This project is something like food blog, where you can create account, create y
 
 ## Installation
 
-- 'npm install' and then 'npm start' on /backend and /frontend folders.
+- 'npm install' and then 'npm start' on ./backend and ./frontend.
 - .env file on backend need your own configuration.
-- you need to run local MySQL DB.
+- you need to run MySQL DB locally (I've used XAMPP to run Apache and MySQL).
 
 ## Available Scripts
 
