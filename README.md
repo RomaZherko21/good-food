@@ -33,14 +33,14 @@ Launches the test runner in the interactive watch mode.
 
 ## API
 
-- **_./customers:_** operations with customers;
-        - *post('./customers/changeMetaData')* change customer meta data
-- **_./products:_** operations with products;
-        - *get('./products')* get all products
-        - *get('./products/category)* get category products 
-        - *get('./products/:category/:id)* get product by id 
-- **_./auth:_** signIn, signUp, cookies requests;
-        - *post('./auth/signUp')* create new user (emailChecked:false)
-        - *post('./auth/emailChecked')* email token checked -> emailChecked:true -> create new user (emailChecked:true) 
-        - *post('./auth/signIn')* logged into account with email,password and QR code 
-        - *get('./auth/cookie')* main page on load -> get cookies
+* **_./customers:_** operations with customers;
+        1. *post('./customers/changeMetaData')* change customer meta data 
+* **_./products:_** operations with products;
+        1. *get('./products')* get all products
+        2. *get('./products/category)* get category products 
+        3. *get('./products/:category/:id)* get product by id 
+* **_./auth:_** signIn, signUp, cookies requests;
+        1. *post('./auth/signUp')* create new user (emailChecked:false)
+        2. *post('./auth/emailChecked')* email token checked -> emailChecked:true -> create new user (emailChecked:true) 
+        3. *post('./auth/signIn')* logged into account with email,password and QR code 
+        4. *get('./auth/cookie')* main page on load -> get cookies
