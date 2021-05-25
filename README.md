@@ -33,13 +33,13 @@ Launches the test runner in the interactive watch mode.
 
 ## API
 
-* **_./customers:_** operations with customers;
-  - *post('./customers/changeMetaData')* change customer meta data 
-* **_./products:_** operations with products;
+* ***_./customers:_*** operations with customers;
+  - **post('./customers/changeMetaData')** change customer meta data 
+* ***_./products:_*** operations with products;
   - **get('./products')** get all products
   - **get('./products/category)** get category products 
   - **get('./products/:category/:id)** get product by id 
-* **_./auth:_** signIn, signUp, cookies requests;
+* ***_./auth:_*** signIn, signUp, cookies requests;
   - **post('./auth/signUp')** create new user (emailChecked:false)
   - **post('./auth/emailChecked')** email token checked -> emailChecked:true -> create new user (emailChecked:true) 
   - **post('./auth/signIn')** logged into account with email,password and QR code 
